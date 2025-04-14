@@ -1,0 +1,253 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Generalized Battle Bot Autonomy - Planning}
+
+\author{\IEEEauthorblockN{Omri Zvi Green}
+\IEEEauthorblockA{\textit{Robotics Engineering} \\
+\textit{Worcester Polytechnic Institute}\\
+Worcester, Massachusetts, United States of America \\
+ozgreen@wpi.edu}}
+
+\maketitle
+
+\begin{abstract}
+This document is a model and instructions for \LaTeX.
+This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+or Math in Paper Title or Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Combat Robotics, BattleBot, Beetle Weight, Kinodynamic Planning
+\end{IEEEkeywords}
+
+\section{Introduction}
+The sport of combat robotics or Battle Bots is a relatively new phenomenon, with the first competition taking place in 1989, the MileHiCon CritterCrunch \cite{b1}.  The essence of the sport is similar a mix of the gladiator fights of Rome and modern MMA, at one of the most popular events, the National Havoc Robotics League, the robots continue fighting until one of the following scenarios take place:
+\begin{enumerate}
+\item{The time limit is reached \cite{b2}}
+\item{One of the robots is completely disabled or "Knocked Out" \cite{b2}}
+\item{An operator of one of the robot concedes the match or "Taps Out" \cite{b2}}
+\item{There is a Arena Failure, meaning the arena was broken by one of the robots \cite{b2}}
+\item{Both robots are entangled and unable to be separated \cite{b2}}
+\end{enumerate} 
+In scenarios where the winner is unclear such as in scenarios 1, 4, or 5, the winner is decided by a Judges decision where they evaluate who the winner is based on the 3 following criteria:
+\begin{enumerate}
+\item{Robot Functionality: How well each robot works at the end of the fight \cite{b2}}
+\item{Aggression: How much each robot is attacking the opponent \cite{b2}}
+\item{Control: How much each robot "controls" the fight, such as pinning them against the wall \cite{b2}}
+\end{enumerate}
+With these criteria in place we can determine that the optimal general planner for automating a combat robot,, we must primarily focus on one strategy, attacking the opponent as much as possible overwhelming them with constant attacks.  After all the best defense is a good offense.
+
+\section{Related Works}
+
+To create an generalized kinodynamic planner capable of controlling a wide variety of different Battle Bots at competitions such as the National Havoc Robotics League (NHRL) or BattleBots we must not only understand the taxonomy of combat robots, understanding how they move, and how they fight; we must also understand how existing kinodynamic models of robots with similar drive systems, as well as examine existing examples of autonomous battle bots.
+
+\subsection{A Taxonomy Of Combat Robots}
+\subsubsection{Drive Systems}
+
+A combat robot's drive system can usually be described as being driven by a form differential drive, they are typically powered by 2 separate drive motors due to the limited weight allowed for each robot, one example of a differential robot is Very Original, a four wheel drive (4WD) robot, which is shown going in a circle below:
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.3]{Differential Drive 4WD.png}
+\caption{Very Original following a circular path}
+\label{Very Original Following a circular path}
+\end{figure} 
+
+Other examples of differential drive based methods include two wheel drive robots (2WD), shuffler driven robots, and Jansen Linkage based drive systems.  These methods are shown in the respective robots shown below, Double Stuffed, Blunder, and Pawsitively Hissterical.
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{doublestuffed.png}
+\caption{Double Stuffed: 2 Wheel Drive}
+\label{Double Stuffed: 2 Wheel Drive}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{blunder.png}
+\caption{Blunder: Shuffler Drive}
+\label{Blunder: Shuffler Drive}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{pawsitivelyhissterical.png}
+\caption{Pawsitively Hissterical: Jansen Linkage Drive}
+\label{Pawsitively Hissterical: Jansen Linkage Drive}
+\end{figure}
+
+There are also other kinds of drive systems used in combat robotics, but they tend to be far less common, examples include true walkers such as Clockwork Princess which are legged robots, Melty Brains such as Project Liftoff which typically spin incredibly quickly and by using an onboard processor and a inertial measurement unit they can be controlled as if they were a point robot, and Swerve Drive robots such as Shifty which work by rotating their wheels along the Z-axis to allow better control at the cost of additional weight.  Each of these robots is shown below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.3]{clockworkprincess.png}
+\caption{Clockwork Princess: True Walker}
+\label{Clockwork Princess: True Walker}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{projectliftoff.png}
+\caption{Project Liftoff: Melty Brain}
+\label{Project Liftoff: Melty Brain}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{shifty.png}
+\caption{Shifty: Swerve Drive}
+\label{Shifty: Swerve Drive}
+\end{figure}
+
+\subsubsection{Weapon Types}
+
+While a battle bot must be able to move, they must also be able to fight, meaning that over the years people have developed a wide variety of weapon types.  Due to this will be fitting these weapons into 3 separate categories based on shared features which will be gone over in separate paragraphs.
+\begin{enumerate}
+\item{Vertical Spinners}
+\item{Horizontal Spinners}
+\item{Non-Spinning Weapons}
+\end{enumerate}
+
+Vertical Spinners are a weapon type that can be described mathematically as a cylinder rotating with its axis of rotation being in the x or y axis in a 3 dimensional space.  Vertical Spinners can then be split into two more categories, which we will call direct, and non-direct.  A direct vertical spinner operates by hitting an opposing robot with a spinning weapon when it initially contacts the opponent, examples of these kinds of weapons are beater bars, drum spinners, drisks, and traditional vertical spinners.  These are mounted on the robots, Eruption, Necromancer, Red Panda, and Blink which are shown below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{eruption.png}
+\caption{Eruption: Beater Bar}
+\label{Eruption: Beater Bar}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{necromancer.png}
+\caption{Necromancer: Drum Spinner}
+\label{Necromancer: Drum Spinner}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{redpanda.jpg}
+\caption{Red Panda: Drisk}
+\label{Red Panda: Drisk}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{blink.png}
+\caption{Blink: Traditional Vertical Spinner}
+\label{Blink: Traditional Vertical Spinner}
+\end{figure}
+
+A Non-direct vertical spinner is a vertical spinner that spins up to speed and then is actuated in some way to hit a robot in more venerable areas, typically the top or bottom of the robot.  Examples of this kind of weapon include robots like Chippy use a hammersaw which works by spinning up the vertical spinner to a high speed then hit the top of the opponent as hard as they can to reach vulnerable electronics, saw bots such as Mako work similarly to hammersaws, except they are actuated by a servo allowing them saw through the top of the robot, and lastly a brand new type of weapon used on the robot Juxtaposition, which we will call a inverse hammersaw due to the fact it operates similarly to a hammersaw where it aims to hit the bottom of a robot rather than the top.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.05]{chippy.jpg}
+\caption{Chippy: Hammersaw}
+\label{Chippy: Hammersaw}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{mako.png}
+\caption{Mako: Saw}
+\label{Mako: Saw}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{juxtaposition.png}
+\caption{Juxtaposition: Inverse Hammersaw}
+\label{Juxtaposition: Inverse Hammersaw}
+\end{figure}
+
+\newpage
+
+Horizontal Spinners can be mathematically described similarly to a vertical spinner except that the axis of rotation of the weapon is in the Z-axis in a 3d environment rather than perpendicular to it.  Examples of this kind of spinner are typically categorized by where they lie in relation to the top and bottom of the robot, examples of these include undercutters such as Explosion has its weapon lie under the main body of the robotmidcutters such as The Throngler has its weapon lie in the middle of the robot, and overcutters such as Budget Extinction has their weapon lie above the main body of the robot.  There are also ring spinners such as Double Stuffed which use a ring rotating around the center as their weapon, there are also shell-spinners such as Chonkiv which spin their armor to function as their weapon.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{explosion.jpg}
+\caption{Explosion: Undercutter}
+\label{Explosion: Undercutter}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{throngler.png}
+\caption{The Throngler: Midcutter}
+\label{The Throngler: Midcutter}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{budgetextinction.png}
+\caption{Budget Extinction: Overcutter}
+\label{Budget Extinction: Overcutter}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{doublestuffed.png}
+\caption{Double Stuffed: Ring Spinner}
+\label{Double Stuffed: Ring Spinner}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{chonkiv.png}
+\caption{Chonkiv: Shell Spinner}
+\label{Chonkiv: Shell Spinner}
+\end{figure}
+
+While spinning weapons are the most common type of weapon on a combat robot, there are a few kinds of non-spinning weapon.  These do not impart damage through hitting a robot with a rotating weapon, rather they do something else to either cause damage or ensure control.  Examples of non-spinning weapons include flamethrowers such as the one used on Clyde, flippers such as Bison work by launching the opponent into the air with an actuated plate, while lifters such as Master Control Bot simply lift their opponents up so they are temporarily ineffective.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{clyde.png}
+\caption{Clyde: Flamethrower}
+\label{Clyde: Flamethrower}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{bison.jpg}
+\caption{Bison: Flipper}
+\label{Bison: Flipper}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{mcbmastercontrolbot.png}
+\caption{Master Control Bot: Lifter}
+\label{Master Control Bot: Lifter}
+\end{figure}
+
+\newpage
+
+
+
+\begin{thebibliography}{00}
+\bibitem{b1} Berry, M. (2012, January). The history of robot combat: From humble beginnings to multinational sensation. Servo Magazine. https://www.servomagazine.com/magazine/article/the\_history\_of\_robot\_combat\_from\_humble\_beginnings.
+\bibitem{b2} NHRL. (n.d.). https://wiki.nhrl.io/wiki/index.php?title=NHRL.
+
+
+
+\end{thebibliography}
+
+\vspace{12pt}
+
+
+
+\end{document}
