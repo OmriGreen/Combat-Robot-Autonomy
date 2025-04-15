@@ -13,7 +13,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Generalized Battle Bot Autonomy - Planning}
+\title{Kinodynamic Planning for Autonomous Battlebots}
 
 \author{\IEEEauthorblockN{Omri Zvi Green}
 \IEEEauthorblockA{\textit{Robotics Engineering} \\
@@ -69,7 +69,7 @@ Other examples of differential drive based methods include two wheel drive robot
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{doublestuffed.png}
-\caption{Double Stuffed: 2 Wheel Drive}
+\caption{Double Stuffed: 2 Wheel Drive \cite{b2}}
 \label{Double Stuffed: 2 Wheel Drive}
 \end{figure}
 
@@ -83,7 +83,7 @@ Other examples of differential drive based methods include two wheel drive robot
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{pawsitivelyhissterical.png}
-\caption{Pawsitively Hissterical: Jansen Linkage Drive}
+\caption{Pawsitively Hissterical: Jansen Linkage Drive \cite{b2}}
 \label{Pawsitively Hissterical: Jansen Linkage Drive}
 \end{figure}
 
@@ -92,21 +92,21 @@ There are also other kinds of drive systems used in combat robotics, but they te
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.3]{clockworkprincess.png}
-\caption{Clockwork Princess: True Walker}
+\caption{Clockwork Princess: True Walker \cite{b4}}
 \label{Clockwork Princess: True Walker}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{projectliftoff.png}
-\caption{Project Liftoff: Melty Brain}
+\caption{Project Liftoff: Melty Brain \cite{b2}}
 \label{Project Liftoff: Melty Brain}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{shifty.png}
-\caption{Shifty: Swerve Drive}
+\caption{Shifty: Swerve Drive \cite{b2}}
 \label{Shifty: Swerve Drive}
 \end{figure}
 
@@ -124,28 +124,28 @@ Vertical Spinners are a weapon type that can be described mathematically as a cy
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{eruption.png}
-\caption{Eruption: Beater Bar}
+\caption{Eruption: Beater Bar \cite{b2}}
 \label{Eruption: Beater Bar}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{necromancer.png}
-\caption{Necromancer: Drum Spinner}
+\caption{Necromancer: Drum Spinner \cite{b2}}
 \label{Necromancer: Drum Spinner}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{redpanda.jpg}
-\caption{Red Panda: Drisk}
+\caption{Red Panda: Drisk \cite{b2}}
 \label{Red Panda: Drisk}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{blink.png}
-\caption{Blink: Traditional Vertical Spinner}
+\caption{Blink: Traditional Vertical Spinner \cite{b2}}
 \label{Blink: Traditional Vertical Spinner}
 \end{figure}
 
@@ -154,21 +154,21 @@ A Non-direct vertical spinner is a vertical spinner that spins up to speed and t
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.05]{chippy.jpg}
-\caption{Chippy: Hammersaw}
+\caption{Chippy: Hammersaw \cite{b2}}
 \label{Chippy: Hammersaw}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{mako.png}
-\caption{Mako: Saw}
+\caption{Mako: Saw \cite{b2}}
 \label{Mako: Saw}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{juxtaposition.png}
-\caption{Juxtaposition: Inverse Hammersaw}
+\caption{Juxtaposition: Inverse Hammersaw \cite{b2}}
 \label{Juxtaposition: Inverse Hammersaw}
 \end{figure}
 
@@ -179,7 +179,7 @@ Horizontal Spinners can be mathematically described similarly to a vertical spin
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{explosion.jpg}
-\caption{Explosion: Undercutter}
+\caption{Explosion: Undercutter \cite{b2}}
 \label{Explosion: Undercutter}
 \end{figure}
 
@@ -193,21 +193,21 @@ Horizontal Spinners can be mathematically described similarly to a vertical spin
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{budgetextinction.png}
-\caption{Budget Extinction: Overcutter}
+\caption{Budget Extinction: Overcutter \cite{b2}}
 \label{Budget Extinction: Overcutter}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{doublestuffed.png}
-\caption{Double Stuffed: Ring Spinner}
+\caption{Double Stuffed: Ring Spinner \cite{b2}}
 \label{Double Stuffed: Ring Spinner}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{chonkiv.png}
-\caption{Chonkiv: Shell Spinner}
+\caption{Chonkiv: Shell Spinner \cite{b2}}
 \label{Chonkiv: Shell Spinner}
 \end{figure}
 
@@ -216,31 +216,67 @@ While spinning weapons are the most common type of weapon on a combat robot, the
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{clyde.png}
-\caption{Clyde: Flamethrower}
+\caption{Clyde: Flamethrower \cite{b2}}
 \label{Clyde: Flamethrower}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{bison.jpg}
-\caption{Bison: Flipper}
+\caption{Bison: Flipper \cite{b2}}
 \label{Bison: Flipper}
 \end{figure}
 
 \begin{figure}[htp]
 \centering
 \includegraphics[scale=0.4]{mcbmastercontrolbot.png}
-\caption{Master Control Bot: Lifter}
+\caption{Master Control Bot: Lifter \cite{b2}}
 \label{Master Control Bot: Lifter}
 \end{figure}
 
 \newpage
+
+\subsection{Kinodynamic Planner}
+According to the paper "Kinodynamic Motion Planning" which first created a practical Kinodynamic Motion Planning algorithm in 1993 \cite{b3}, "The kinodynamic planning problem is to synthesize a robot motion subject to simultaneous kinematic constraints, such as avoiding obstacles, and dynamics constraints, such as modulus bounds on velocity, acceleration, and force."\cite{b3}, essentially it is the problem on how to calculate the most efficient path to a goal while taking into account how the robot moves and is affected by forces imparted on it by said movements.  This is in contrast to other forms of motion planning which ignore the limitations on the robot, this can potentially lead to situations where the motion plan cannot be completed by the robot because it is unable to complete the path.  
+
+\subsection{Existing Autonomous Battle Bots}
+
+In the context of autonomous battle bots the fact that most planners do not take take robot kinodynamics directly affects their design necessitating either specific robot architectures or the use of flywheels.  While this is not an issue in the case of autonomous Melty Brains such as Deep Melt, the first fully autonomous battle bot to compete at the National Havoc Robotics League, however, it doesn't do any planning in an interview with its creator he said that "... if an opponent like brings an IR flashlight and shines it at us, you gave us a beacon to you"\cite{b5} implying that the robot simply seeks out the area where the IR reflects the most from its IR mapping system.  Especially considering the fact that as a Melty Brain, Deep Melt can act as a point robot, there isn't any planning involved in its fights.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.4]{deepmelt.jpg}
+\caption{Deep Melt: Autonomous Melty Brain \cite{b2}}
+\label{Deep Melt: Autonomous Melty Brain}
+\end{figure}
+
+Another autonomous battle bot is Orbitron, the first autonomous robot to appear on the show Battlebots, which works by essentially "orbiting" its opponent until it gets a "kill" command at which point it impacts its opponent to damage it \cite{b6}.  There is no mention of the planning algorithm used, however, when talking about the robot undesirably spinning along the robot's Z-axes when the weapon is turned on, "That's the whole reason we do it to spinners is that spin right there" \cite{b6} when referring to how the vertical spinners are mounted symmetrically on opposite sides of the robot, while spinning in opposite directions to eliminate the torque on the robot which causes the rotation.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.25]{orbitron.png}
+\caption{Orbitron: Autonomous Vertical Spinner \cite{b6}}
+\label{Orbitron: Autonomous Vertical Spinner}
+\end{figure}
+
+When looking at these autonomous battlebots there is one commonality, they are designed around autonomy.  Rather than being designed as a good robot first, and then making it autonomous, autonomous battlebots are designed to make control as easy as possible, however, it makes it impossible to generalize an autonomy system, since with these robots, the physical design of the robot is designed to make autonomy easier, rather than designing autonomy around existing robots.
 
 
 
 \begin{thebibliography}{00}
 \bibitem{b1} Berry, M. (2012, January). The history of robot combat: From humble beginnings to multinational sensation. Servo Magazine. https://www.servomagazine.com/magazine/article/the\_history\_of\_robot\_combat\_from\_humble\_beginnings.
 \bibitem{b2} NHRL. (n.d.). https://wiki.nhrl.io/wiki/index.php?title=NHRL.
+\bibitem{b3} Bruce Donald, Patrick Xavier, John Canny, and John Reif. 1993. Kinodynamic motion planning. J. ACM 40, 5 (Nov. 1993), 1048–1066. https://doi.org/10.1145/174147.174150.
+\bibitem{b4} YouTube. (2025, February 17). What do you think they are dancing to?. YouTube. https://www.youtube.com/shorts/v5k6JwF7RNw.
+
+
+
+\bibitem{b5} YouTube. (2022, December 8). Roomba x ChatGPT: Autonomous AI fighting robots, should we be worried?. YouTube. https://www.youtube.com/watch?v=Mr1YULNlAnE.
+
+
+\bibitem{b6} YouTube. (2023, September 3). Building the First AUTONOMOUS BattleBot!? (VIDEO \#1/6)*. \text{https://www.youtube.com/watch?v=suv6DtRLnMw\&list=PLbncXbXlaNQemX6I22vQD6zWfIzIN9eOb}.
+
+
 
 
 
