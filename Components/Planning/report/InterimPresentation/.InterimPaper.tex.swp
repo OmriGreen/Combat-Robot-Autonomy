@@ -13,7 +13,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Kinodynamic Planning for Autonomous Battlebots}
+\title{Generalized Kinodynamic Motion Planning for Autonomous Battlebots}
 
 \author{\IEEEauthorblockN{Omri Zvi Green}
 \IEEEauthorblockA{\textit{Robotics Engineering} \\
@@ -24,9 +24,7 @@ ozgreen@wpi.edu}}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+This paper presents a novel kinodynamic planning framework for autonomous combat robots ("battlebots") that generalizes across different drive systems and weapon configurations. We address the unique challenges of autonomous battle robot navigation, including adversarial environments, weapon-specific constraints, and real-time planning requirements. Our approach models battlebots as differential drive systems with varying weapon dynamics, enabling unified motion planning regardless of specific robot configuration. We develop a comprehensive kinodynamic model that accounts for both locomotion and weapon forces, then benchmark five different planning algorithms (PRM, RG-RRT, ST-RRT*, RRT, and KPIECE1) across six robot configurations in simulated combat scenarios. Results demonstrate that our generalized approach enables effective real-time motion planning for autonomous battlebots while satisfying the specific kinodynamic constraints of each robot type. This work contributes to the emerging field of autonomous combat robotics by providing a foundational planning framework that can be applied to a wide variety of battle robot designs without requiring robot-specific algorithm development.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -210,6 +208,7 @@ Horizontal Spinners can be mathematically described similarly to a vertical spin
 \caption{Chonkiv: Shell Spinner \cite{b2}}
 \label{Chonkiv: Shell Spinner}
 \end{figure}
+\newpage
 
 While spinning weapons are the most common type of weapon on a combat robot, there are a few kinds of non-spinning weapon.  These do not impart damage through hitting a robot with a rotating weapon, rather they do something else to either cause damage or ensure control.  Examples of non-spinning weapons include flamethrowers such as the one used on Clyde, flippers such as Bison work by launching the opponent into the air with an actuated plate, while lifters such as Master Control Bot simply lift their opponents up so they are temporarily ineffective.
 
@@ -261,14 +260,164 @@ Another autonomous battle bot is Orbitron, the first autonomous robot to appear 
 
 When looking at these autonomous battlebots there is one commonality, they are designed around autonomy.  Rather than being designed as a good robot first, and then making it autonomous, autonomous battlebots are designed to make control as easy as possible, however, it makes it impossible to generalize an autonomy system, since with these robots, the physical design of the robot is designed to make autonomy easier, rather than designing autonomy around existing robots.
 
+\section{Creating the Kinodynamic Model}
+In order to create a generalized kinodynamic planner for use in combat robotics, we first must create a generalized kinodynamic model of a combat robot.  We first must decide on its environment, since the vast majority of combat robots operate on the ground, with very few exceptions, we can model it in a 2 dimensional plane.  With this knowledge we can start with modeling the drive system of a robot, and since most robot drive systems can be modeled as a differential drive with the exceptions of the Melty Brains, which do not require a Kinodynamic model since they can be modeled as a point robot, and Swerve Drives, which are very rare with only 3 robots competing in the National Havoc Robotic League since 2018 as of May 2025\cite{b2}.  This means that we can cover the vast majority of combat robots by modeling all drive systems as a differential drive.  Of the differential drives we can create the force diagrams of the 2 types of differential drive, a 2 "wheel" drive (2WD), and a 4 "wheel" drive (4WD) as seen in the 2 models below where the "wheels" represent an locomotion method.  Additionally, by creating a force diagram of the weapon we can create a Kinodynamic model for a generalized combat robot.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{2WD.png}
+        \caption{Force Diagram of a 2 Wheel Drive}
+        \label{fig:rrt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{4WD.png}
+        \caption{Force Diagram of a 4 Wheel Drive}
+        \label{fig:kinorrt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{weapon.png}
+        \caption{Force Diagram of a Battlebot's Weapon}
+        \label{fig:kinorrt}
+    \end{minipage}
+*
+\end{figure}
+
+With the creation of the force diagrams, we can begin creating an example of a Kinodynamic model of a robot by deriving from known variables and our control space as shown below:
+\begin{equation}
+\mathcal{U} = \{PWM_L, PWM_R, PWM_W\}
+\label{eq:control_space}
+\end{equation}
+\begin{equation}
+PWM_L, PWM_R, PWM_W \in [-1,1]
+\label{eq:control_space_dimensions}
+\end{equation}
+
+These 3 values represent the PWM or Pulse Width Modulation signal that go into the 3 relevant motors in the robot, the left drive motor, the right drive motor, and the weapon motor. By controlling the PWM signal the robot can control the torque each motor outputs.  Since the torque each motor outputs is known from the datasheets for each motor, and we know the inertial mass of the wheels and the weapon that the motors are turning we can also calculate the maximum angular acceleration for each motor in the robot using the generalized equation seen below:
+
+\begin{equation}
+\alpha_{max} = \frac{\tau}{I}
+\label{eq:maximimum_angular_acceleration}
+\end{equation}
+
+Assuming that every wheel has the same known radius $r_{wheel}$ and same inertial mass $I_{wheel}$ where the tires have a coefficient of friction of $\mu_F$ with the calculated value of the maximum angular acceleration of the drive motors $\alpha_{maxDrive}$, in addition to the PWM values for the left and right drive motors $PWM_L$ and $PWM_R$  we can calculate the linear acceleration of the robot for both the 2WD and 4WD drive configurations using the equation below:
 
 
+\begin{equation}
+a_{linear}= \frac{\alpha_{maxDrive}\cdot r_{wheel} \cdot \mu_F \cdot (PWM_L + PWM_R)}{2}
+\label{eq:linear_acceleration_calculation}
+\end{equation}
+
+After calculated the linear acceleration we must then calculate the force generated in the y and x axis of each wheel, the equations used with a generalized PWM value $PWM$ and the mass of the robot $m_{robot}$are shown below:
+
+\begin{equation}
+F_x = I_{wheel} \cdot  \alpha_{maxDrive} \cdot r_{wheel} \cdot PWM
+\label{eq:X_direction_Wheel_Force}
+\end{equation}
+
+\begin{equation}
+F_y = \frac{1}{2} \cdot m_{robot} \cdot I_{wheel} \cdot  \alpha_{maxDrive} \cdot r_{wheel} \cdot PWM
+\label{eq:Y_direction_Wheel_Force}
+\end{equation}
+
+After finding the $F_x$ and $F_y$ values for every wheel in the robot, you then find the magnitude of the force tangent to a circle of a radius $\sqrt{\Delta x^2 + \Delta y^2}$ where $\Delta x$ and $\Delta y$ represent the distance from the center of mass of the robot in the x and y planes respectively.  Then you must calculate the tangent force that the wheel imparts on the circle, and lastly you must find the torque each wheel imparts on the robot.  Then by adding everything together you can get $\tau_{drive}$.  To calculate $\tau_{Weapon}$ you use the same method as for calculated the torque of a wheel except that $F_y=0$ in the case it is a vertical spinner, otherwise $\tau_{Weapon}=0$.  Lastly, to calculate the total torque on the robot you use the following equation, then using the torque and the total inertial mass of your robot $I_{robot}$ in the z axis you can find the angular acceleration of the robot $\alpha_{robot}$: 
+
+\begin{equation}
+\tau_{Robot} = \tau_{Drive} + \tau_{Weapon}
+\label{eq:Total_Torque_Robot}
+\end{equation}
+\begin{equation}
+\alpha_{Robot} = \frac{\tau_{robot}}{I_{robot}}
+\label{eq:Angular_Acceleration_Robot}
+\end{equation}
+
+With the values $a_{linear}$ and $\alpha_{robot}$ it is possible to create the Kinodynamic model of the robot as seen below:
+
+\begin{equation}
+\mathbf{\ddot{q}} = 
+\begin{bmatrix}
+\ddot{x}_{robot} \\
+\ddot{y}_{robot} \\
+\ddot{\omega}_{robot} \\
+\ddot{v}_{robot} \\
+\ddot{\omega_{weapon}}
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\dot{v}_{robot}cos(\theta) \\
+\dot{v}_{robot}sin(\theta) \\
+\ddot{\omega}_{robot} \\
+\ddot{v}_{robot} \\
+\ddot{\omega_{weapon}}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mathbf{\dot{q}} = 
+\begin{bmatrix}
+\dot{x}_{robot} \\
+\dot{y}_{robot} \\
+\dot{\omega}_{robot} \\
+\dot{v}_{robot} \\
+\dot{\omega_{weapon}}
+\end{bmatrix}
+= 
+\begin{bmatrix}
+{v}_{robot}cos(\theta) \\
+{v}_{robot}sin(\theta) \\
+\dot{\omega}_{robot} \\
+\dot{v}_{robot} \\
+\dot{\omega_{weapon}}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mathbf{q} = 
+\begin{bmatrix}
+{x}_{robot} \\
+{y}_{robot} \\
+{\omega}_{robot} \\
+{v}_{robot} \\
+{\omega_{weapon}}
+\end{bmatrix}
+\
+\end{equation}
+
+Of course, there is a maximum speed both linear and angular for all components determined by the hardware of the robot, with bounds in the x and y axis due to the arena the robot will be in.
+
+\section{Representing the Arena}
+In this paper we will be representing the arena used by Beetleweight or 3 lb robots in the National Havok Robotics League (NHRL).  According to the NHRL rulebook the arena is a 8'x8' wide square \cite{b2}, this sets the dimensionality of our experimental arena.  Additionally, we will be assuming that it is a real fight with a opponent with a constant velocity and a house bot that is also moving at a constant velocity.  The objective of the planner is to have our robot which starts at a randomized orientation, location, and velocity to simulate a portion of an actual fight.  The objective of our planner is to have our robot intercept the opponent with its weapon at maximum angular velocity while avoiding the housebot. In regards to the interception criteria it depends on the weapon type, the horizontal and vertical spinners must be at their maximum angular velocity on impact, while with the non-spinning weapons it is irrelevant, they just need to hit the opponent.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.125]{arena.png}
+\caption{Beetleweight Arena}
+\label{Beetleweight Arena}
+\end{figure}
+
+\section{Evaluation}
+To evaluate if the kinodynamic planning algorithm can truly function as a generalized kinodynamic planner for a wide variety of combat robots we will benchmark 6 separate configurations with 10 tests each on 5 separate planners, one for every potential combination of characterized drive system and weapon system which are all listed below:
+
+\begin{enumerate}
+\item{2WD Vertical Spinner}
+\item{4WD Vertical Spinner}
+\item{2WD Horizontal Spinner}
+\item{4WD Horizontal Spinner}
+\item{2WD Non-Spinning Weapon}
+\item{4WD Non-Spinning Weapon}
+\end{enumerate}
+
+The path planning will take place in the Open Motion Planning Library (OMPL), the planners that will be benchmarked are Probabilistic Random Mapping (PRM), Rapidly-exploring Random Tree with Guidance (RG-RRT), Space-time RRT* (ST-RRT*), Rapidly-Exploring Random Tree (RRT), and Kinodynamic Planning by Interior-Exterior Cell Exploration (KPIECE1).  From this we will determine which one of these is the fastest, and if the average solve time is less than 2 seconds, we will consider it practical for usage with battle bots.
+
+
+\newpage
 \begin{thebibliography}{00}
 \bibitem{b1} Berry, M. (2012, January). The history of robot combat: From humble beginnings to multinational sensation. Servo Magazine. https://www.servomagazine.com/magazine/article/the\_history\_of\_robot\_combat\_from\_humble\_beginnings.
 \bibitem{b2} NHRL. (n.d.). https://wiki.nhrl.io/wiki/index.php?title=NHRL.
 \bibitem{b3} Bruce Donald, Patrick Xavier, John Canny, and John Reif. 1993. Kinodynamic motion planning. J. ACM 40, 5 (Nov. 1993), 1048–1066. https://doi.org/10.1145/174147.174150.
 \bibitem{b4} YouTube. (2025, February 17). What do you think they are dancing to?. YouTube. https://www.youtube.com/shorts/v5k6JwF7RNw.
-
 
 
 \bibitem{b5} YouTube. (2022, December 8). Roomba x ChatGPT: Autonomous AI fighting robots, should we be worried?. YouTube. https://www.youtube.com/watch?v=Mr1YULNlAnE.
