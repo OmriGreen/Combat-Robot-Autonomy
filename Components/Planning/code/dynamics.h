@@ -12,11 +12,12 @@ struct dynamics{
     float alpha_right_drive_max;
     // maximum Angular Acceleration on the weapon
     float alpha_weapon_max;
-    // Maximum Linear Accelearation
+    float alpha_weapon_min;
+
     // Acceleartion of the system ------------------------------------
     // Maximum linear acceleration of the system
     float acceleration_max;
-    // Maximimum angular acceleration of they system in the counter-clockwise direction
+    // Maximimum angular acceleration of the system in the counter-clockwise direction
     float alpha_min;
     // Maximum angular acceleartion of the system in the clockwise direction
     float alpha_max;
@@ -29,7 +30,8 @@ struct dynamics{
     float omega_right_drive_max;
     // maximum angular speed on the weapon
     float omega_weapon_max;
-    
+    float omega_weapon_min;
+
     // Velocity of the system ----------------------------------------
     // maximum linear velocity of the robot
     float velocity_max;

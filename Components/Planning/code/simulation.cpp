@@ -88,14 +88,28 @@ int calcProperties(std::string filePath){
     std::ifstream inputFile(filePath);  
     std::string line;
     std::vector<float> lineData;
-    float MOI;
+    float Weapon_MOI;
     bool isClockwise;
+    bool isBidirectional;
+    float Weapon_Power;
+    float Weapon_Motor_Max_Omega;
+    float Weapon_Reduction;
+    float Weapon_Alpha;
+    float Weapon_Omega;
+    float Drive_Power;
+    float Drive_Motor_Max_Omega;
+    float Robot_Mass;
+    float Robot_MOI;
+    // Calculates weapon spinup time
+    float spinUpTime;
+    
+
 
 
     int lineCount = 0;
     if (inputFile.is_open()) {
         while (std::getline(inputFile, line)) {
-            valCount = 0; //Counts values in a line
+            lineData = split(line);
             // Reads the first line to find isCircle and isGeometric
             if(lineCount == 0){
                 // isCircle, isHorizontal
@@ -106,25 +120,25 @@ int calcProperties(std::string filePath){
             if(lineCount==1){
                 // radius
                 if(isCircle){
-                    robotGeometry.robot_height=NULL;
-                    robotGeometry.robot_width=NULL;
+                    robotGeometry.robot_height=-1;
+                    robotGeometry.robot_width=-1;
                     robotGeometry.robot_radius=lineData[0];
                 }
                 else{
                     // width, height
-                    robotGeometry.width=lineData[0];
-                    robotGeometry.height=lineData[1];
-                    robotGeometry.radius=NULL;
+                    robotGeometry.robot_width=lineData[0];
+                    robotGeometry.robot_height=lineData[1];
+                    robotGeometry.robot_radius=-1;
                 }
             }
 
-            // Calculates the affect of the robot's weapon on the robot as well as finding the applicable dynamics
+            // Calculates the geometry and robot's weapon and gets data for its dynamics
             if(lineCount==2){
                 // GEOMETRIC DATA ==========================================================
                 if(isHorizontal){
                     // x y radius isClockwise MOI PWMInputVal
-                    robotGeometry.weapon_height = NULL;
-                    robotGeometry.weapon_width = NULL;
+                    robotGeometry.weapon_height = -1;
+                    robotGeometry.weapon_width = -1;
                     robotGeometry.weapon_radius = lineData[2];
                     robotGeometry.weapon_x = lineData[0];
                     robotGeometry.weapon_y = lineData[1];
@@ -133,7 +147,7 @@ int calcProperties(std::string filePath){
                     // x y width height isClockwise MOI PWMInputVal
                     robotGeometry.weapon_height = lineData[3];
                     robotGeometry.weapon_width = lineData[2];
-                    robotGeometry.weapon_radius = NULL;
+                    robotGeometry.weapon_radius = -1;
                     robotGeometry.weapon_x = lineData[0];
                     
                     // Circular robots measure y from the center of the robot
@@ -142,26 +156,101 @@ int calcProperties(std::string filePath){
                     }
                     // Non-circular robots measure y from the center back of the robot to get the data more easily from CAD
                     else{
-                        robotDynamics.weapon_y = lineData[1]-robotGeometry.robot_height/2;
+                        robotGeometry.weapon_y = lineData[1]-robotGeometry.robot_height/2;
                     }
                 }
 
                 // DYNAMICS DATA ============================================================================
                 if(isHorizontal){
-                    // x y radius isClockwise MOI PWMInputVal
-                    MOI = lineData[4];
-                    isClockwise = lineData[3];
+                    // x y radius isClockwise MOI PWMInputVal, isBidirectinal
+                    // Stored for later use in dynamics calculations
+                    Weapon_MOI = lineData[4];
+                    isClockwise = lineData[3] == 1.0;
+                    isBidirectional = lineData[7] == 1.0;
+                }
+                else{
+                    // x y width height isClockwise MOI PWMInputVal, isBidirectinal
+                    Weapon_MOI = lineData[5];
+                    isClockwise = lineData[4]==1.0;
+                    isBidirectional = lineData[7]==1.0;
 
-                    
+                }
+            }
+            // Calculates Weapon Dynamics
+            if(lineCount==3){
+                // Weapon Power, Weapon max RPM, Weapon Gear Reduction (2 = 2 motor rotations for each weapon rotation)
+                Weapon_Power = lineData[0];
+                Weapon_Motor_Max_Omega = lineData[1]*2*M_PI/60;
+                Weapon_Reduction = lineData[2];
 
+                // Calculates the maximum absolute angular acceleration of the weapon
+                Weapon_Alpha = Weapon_MOI/((Weapon_Power*Weapon_Motor_Max_Omega)/Weapon_Reduction);
+                
+                // Calculates the maximum angular speed of the weapon
+                Weapon_Omega = Weapon_Motor_Max_Omega/Weapon_Reduction;
+                // A bidirectinal weapon can spin in either direction
+                if(isBidirectional){
+                    robotDynamics.alpha_weapon_max=Weapon_Alpha;
+                    robotDynamics.alpha_weapon_min=-Weapon_Alpha;
+                    robotDynamics.omega_weapon_max=Weapon_Omega;
+                    robotDynamics.omega_weapon_min=-Weapon_Omega;
 
                 }
                 else{
-                    // x y width height isClockwise MOI PWMInputVal
-                   
-                }
+                    // Clockwise motion is positive
+                    if(isClockwise){
+                        robotDynamics.alpha_weapon_max=Weapon_Alpha;
+                        robotDynamics.alpha_weapon_min=0;
+                        robotDynamics.omega_weapon_max=Weapon_Omega;
+                        robotDynamics.omega_weapon_min=0;
+                    }
+                    // Counterclockwise motion is negative
+                    else{
+                        robotDynamics.alpha_weapon_max=0;
+                        robotDynamics.alpha_weapon_min=-Weapon_Alpha;
+                        robotDynamics.omega_weapon_max=0;
+                        robotDynamics.omega_weapon_min=-Weapon_Omega;
+                    }
+                }                
             }
+
+            // Gets Data to Calculate Drive Dynamics
+            if(lineCount==4){
+                // Drive Power, Drive max RPM, Drive Power Reduction (2 = 2*Power), Drive Gear Reduction (2 = 2 motor rotations for each weapon rotation)
+                // While Drive Power and Drive Gear reductions should be identical in theory, some drive motors include gearboxes that do not have data on the RPM of the motor without the gearbox
+                Drive_Power = lineData[0]/lineData[2];
+                Drive_Motor_Max_Omega = lineData[1]/lineData[3];
+            }
+
+            // Gets the mass and MOI of the entire robot and calculates affect on maximum angular acceleration and velocity per wheel
+            if(lineCount==5){
+                // Robot Mass, Robot MOI
+                Robot_Mass = lineData[0];
+                Robot_MOI = lineData[1];
+    
+                // Calculates the affect of the weapon on the robot's angular acceleration and maximum angular velocity
+                // Torque = MOI * alpha -> alpha_robot = (MOI_Weapon*alpha_weapon)/MOI_Robot
+                robotDynamics.alpha_max = (Weapon_MOI*robotDynamics.alpha_weapon_max)/Robot_MOI;
+                robotDynamics.alpha_min = (Weapon_MOI*robotDynamics.alpha_weapon_min)/Robot_MOI;
+
+                // Calculates the affect on the angular velocity of the robot due to the weapon
+                // omega = alpha*time -> time = omega/alpha
+                if(isBidirectional || isClockwise){
+                    spinUpTime = abs(robotDynamics.omega_weapon_max/robotDynamics.alpha_weapon_max);
+                }
+                else{
+                    spinUpTime = abs(robotDynamics.omega_weapon_min/robotDynamics.alpha_weapon_min);
+                }
+
+                // Calculates the maximum and minimum velocity of the robot due to the weapon spin up
+                robotDynamics.omega_max = spinUpTime*((Weapon_MOI*robotDynamics.alpha_weapon_max)/Robot_MOI);
+                robotDynamics.omega_min = spinUpTime*((Weapon_MOI*robotDynamics.alpha_weapon_min)/Robot_MOI)
+            }
+
+            // Gets the data for each wheel and then calculates the affect of them on the 
             
+
+
             lineCount=lineCount+1;
         }
         inputFile.close();
