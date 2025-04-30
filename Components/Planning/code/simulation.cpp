@@ -18,6 +18,7 @@
 #include <iostream>
 #include <filesystem>
 #include <limits.h>
+#include <sstream>
 
 
 // Custom Imports
@@ -53,8 +54,126 @@ std::string getExecutableDir() {
     return fullPath.substr(0, found);
 }
 
+// Splits a string by a delimiter
+std::vector<float> split(const std::string& str, char delimiter = ' ') {
+    std::vector<float> tokens;
+    std::stringstream ss(str);
+    std::string token;
+
+    while (std::getline(ss, token, delimiter)) {
+        tokens.push_back(std::stof(token));  
+    }
+
+    return tokens;
+}
+
+// Reads the data and returns a dynamics and a geometry object for the robot to use in modeling itself
+int calcProperties(std::string filePath){
+
+    // List of required data ==============================================
+
+    // Robot Geometry data -------------------------------------
+    // True if the robot's body can be best represented as a circle in a 2d plane
+    bool isCircle;
+    // True if the robot's weapon can be best represented as a circle in a 2d plane
+    bool isHorizontal;
+    // Contains the data on a robot's geometry
+    geometry robotGeometry;
+
+    // Robot Dynamics Data ----------------------------------------
+    dynamics robotDynamics;
 
 
+    // Collects the necessary data from the file for the individual components
+    std::ifstream inputFile(filePath);  
+    std::string line;
+    std::vector<float> lineData;
+    float MOI;
+    bool isClockwise;
+
+
+    int lineCount = 0;
+    if (inputFile.is_open()) {
+        while (std::getline(inputFile, line)) {
+            valCount = 0; //Counts values in a line
+            // Reads the first line to find isCircle and isGeometric
+            if(lineCount == 0){
+                // isCircle, isHorizontal
+                isCircle = lineData[0]==1.0;
+                isHorizontal = lineData[1]==1.0;
+            }
+            // Reads the second line to get the robot's geometry
+            if(lineCount==1){
+                // radius
+                if(isCircle){
+                    robotGeometry.robot_height=NULL;
+                    robotGeometry.robot_width=NULL;
+                    robotGeometry.robot_radius=lineData[0];
+                }
+                else{
+                    // width, height
+                    robotGeometry.width=lineData[0];
+                    robotGeometry.height=lineData[1];
+                    robotGeometry.radius=NULL;
+                }
+            }
+
+            // Calculates the affect of the robot's weapon on the robot as well as finding the applicable dynamics
+            if(lineCount==2){
+                // GEOMETRIC DATA ==========================================================
+                if(isHorizontal){
+                    // x y radius isClockwise MOI PWMInputVal
+                    robotGeometry.weapon_height = NULL;
+                    robotGeometry.weapon_width = NULL;
+                    robotGeometry.weapon_radius = lineData[2];
+                    robotGeometry.weapon_x = lineData[0];
+                    robotGeometry.weapon_y = lineData[1];
+                }
+                else{
+                    // x y width height isClockwise MOI PWMInputVal
+                    robotGeometry.weapon_height = lineData[3];
+                    robotGeometry.weapon_width = lineData[2];
+                    robotGeometry.weapon_radius = NULL;
+                    robotGeometry.weapon_x = lineData[0];
+                    
+                    // Circular robots measure y from the center of the robot
+                    if(isCircle){
+                        robotGeometry.weapon_y = lineData[1];
+                    }
+                    // Non-circular robots measure y from the center back of the robot to get the data more easily from CAD
+                    else{
+                        robotDynamics.weapon_y = lineData[1]-robotGeometry.robot_height/2;
+                    }
+                }
+
+                // DYNAMICS DATA ============================================================================
+                if(isHorizontal){
+                    // x y radius isClockwise MOI PWMInputVal
+                    MOI = lineData[4];
+                    isClockwise = lineData[3];
+
+                    
+
+
+                }
+                else{
+                    // x y width height isClockwise MOI PWMInputVal
+                   
+                }
+            }
+            
+            lineCount=lineCount+1;
+        }
+        inputFile.close();
+    } else {
+        std::cerr << "Unable to open file" << std::endl;
+    }
+
+    return 0;
+}
+
+
+// Main function: Includes robot choice, 
 int main(int /* argc */, char ** /* argv */)
 {
      // Gets file path for the robot before analysis
@@ -62,7 +181,7 @@ int main(int /* argc */, char ** /* argv */)
      std::string filePath = exePath.substr(0, exePath.length() - 6);//removes /build
      filePath = filePath + "/robot_data/";
 
-    // Choosing the robot for analysis
+    // Choosing the robot for analysis-add more if desired
     int choice;
     do
     {
@@ -90,10 +209,9 @@ int main(int /* argc */, char ** /* argv */)
 
     // Gets file path to the file with the robot's information on it
     filePath = filePath + robot;
-    std::cout<<"\n"<<filePath<<std::endl;
 
-    // gets raw data from the inputted file
-    
+    // gets the data needed for creating a kinodynamic model from the inputted file
+    auto robotDynamics = calcProperties(filePath);
 
 
    

@@ -180,10 +180,11 @@ def main():
     print("3. Instructions Robot: \n3.1.2. isCircle refers to the robots geometry,  if false the next line should contain data on the robot's main body in the format: width height")
     print("3. Instructions Robot: \n3.2.1. isHorizontal refers to the robots weapon,  if false the following lines should contain data on the robot's weapon in the format all data is from the back center if isCircle if false, from the center if isCircle is true: x y width height isClockwise MOI PWMInputVal")
     print("3. Instructions Robot: \n3.2.2. isHorizontal refers to the robots weapon,  if true the following lines should contain data on the robot's weapon in the format: x y radius isClockwise MOI PWMInputVal")
-    print("3. Instructions Robot: \n3.3. Following Line refers to weapon motor , while not used in visualization, format: motor_wattage max_RPM gear_reduction")
+    print("3. Instructions Robot: \n3.3. Following Line refers to weapon motor , while not used in visualization | format: motor_wattage max_RPM gear_reduction")
     print("3. Instructions Robot: \n3.4. Following Line refers to drive motor wattage, while not used in visualization, very important to planner")
+    print("3. Instructions Robot: \n3.5. Following Lines refers to the weight and MOI of the robot in kg / N\m| format: mass MOI")
 
-    print("3. Instructions Robot: \n3.5. Following Lines refer to wheel locations, they are formated: x y MOI PWMInputVal and are related to the location based on isCircle")
+    print("3. Instructions Robot: \n3.6. Following Lines refer to wheel locations, they are formated: x y MOI radius PWMInputVal and are related to the location based on isCircle")
 
     print("4. The path text file should specify the the poses of the robot lines \n")
 
