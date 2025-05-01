@@ -2,12 +2,10 @@
 #include <ompl/base/ProjectionEvaluator.h>
 #include <ompl/control/SimpleSetup.h>
 #include <ompl/control/ODESolver.h>
-#include <ompl/base/ProjectionEvaluator.h>
-#include <ompl/control/SimpleSetup.h>
-#include <ompl/control/ODESolver.h>
 #include <ompl/base/spaces/RealVectorStateSpace.h>
 #include <ompl/control/spaces/RealVectorControlSpace.h>
 #include <ompl/tools/benchmark/Benchmark.h>
+
 
 
 // MISC Imprts
@@ -19,14 +17,18 @@
 #include <filesystem>
 #include <limits.h>
 #include <sstream>
+#include <vector>
 
 
 // Custom Imports
-#include "CollisionChecking.h"
 #include "dynamics.h"
+#include "CollisionChecking.h"
 
 namespace ob = ompl::base;
 namespace oc = ompl::control;
+
+// Constant Values
+const float friction_coeff = 0.75; //Coefficient of friction between robot wheels and the arena, find for your specific arena
 
 // Finds location of the executable to find file location 
 #if defined(_WIN32)
@@ -68,7 +70,7 @@ std::vector<float> split(const std::string& str, char delimiter = ' ') {
 }
 
 // Reads the data and returns a dynamics and a geometry object for the robot to use in modeling itself
-int calcProperties(std::string filePath){
+RobotModel calcProperties(std::string filePath){
 
     // List of required data ==============================================
 
@@ -83,6 +85,8 @@ int calcProperties(std::string filePath){
     // Robot Dynamics Data ----------------------------------------
     dynamics robotDynamics;
 
+    // Overall data
+    RobotModel RobotModel;
 
     // Collects the necessary data from the file for the individual components
     std::ifstream inputFile(filePath);  
@@ -130,7 +134,18 @@ int calcProperties(std::string filePath){
     float motor_alpha_max;
     float drive_spin_up=0.0;
 
+    float numWheels = 0;
+    if (inputFile.is_open()) {
+        while (std::getline(inputFile, line)) {
+            numWheels = numWheels +1;
+        }
+        numWheels=numWheels-6;
+    }
+    inputFile.close();
+
     int lineCount = 0;
+    inputFile.open(filePath);
+
     if (inputFile.is_open()) {
         while (std::getline(inputFile, line)) {
             lineData = split(line);
@@ -142,7 +157,6 @@ int calcProperties(std::string filePath){
             }
             // Reads the second line to get the robot's geometry
             if(lineCount==1){
-                std::cout<<"\n1: Success\n";
                 // radius
                 if(isCircle){
                     robotGeometry.robot_height=-1;
@@ -190,12 +204,12 @@ int calcProperties(std::string filePath){
                     }
                 }
 
-                // Check
-                std::cout<<"\n"<<robotGeometry.weapon_height << "\n";
-                std::cout<<"\n"<<robotGeometry.weapon_width << "\n";
-                std::cout<<"\n"<<robotGeometry.weapon_radius<< "\n";
-                std::cout<<"\n"<<robotGeometry.weapon_x << "\n";
-                std::cout<<"\n"<<robotGeometry.weapon_y << "\n";
+                // Check SUCCESS
+                // std::cout<<"\n"<<robotGeometry.weapon_height << "\n";
+                // std::cout<<"\n"<<robotGeometry.weapon_width << "\n";
+                // std::cout<<"\n"<<robotGeometry.weapon_radius<< "\n";
+                // std::cout<<"\n"<<robotGeometry.weapon_x << "\n";
+                // std::cout<<"\n"<<robotGeometry.weapon_y << "\n";
 
 
                 // DYNAMICS DATA ============================================================================
@@ -221,9 +235,9 @@ int calcProperties(std::string filePath){
                 Weapon_Power = lineData[0];
                 Weapon_Motor_Max_Omega = lineData[1]*2*M_PI/60;
                 Weapon_Reduction = lineData[2];
-
+               
                 // Calculates the maximum absolute angular acceleration of the weapon
-                Weapon_Alpha = Weapon_MOI/((Weapon_Power*Weapon_Motor_Max_Omega)/Weapon_Reduction);
+                Weapon_Alpha = (Weapon_Power * Weapon_Reduction) / (Weapon_Motor_Max_Omega * Weapon_MOI);
                 
                 // Calculates the maximum angular speed of the weapon
                 Weapon_Omega = Weapon_Motor_Max_Omega/Weapon_Reduction;
@@ -251,15 +265,23 @@ int calcProperties(std::string filePath){
                         robotDynamics.omega_weapon_min=-Weapon_Omega;
                     }
                 }     
-                           
+                
+                
+                // Checking === WORKS
+                // std::cout<<"\n"<<robotDynamics.alpha_weapon_max<<"\n";
+                // std::cout<<"\n"<<robotDynamics.alpha_weapon_min<<"\n";
+                // std::cout<<"\n"<<robotDynamics.omega_weapon_max<<"\n";
+                // std::cout<<"\n"<<robotDynamics.omega_weapon_min<<"\n";
+
             }
 
             // Gets Data to Calculate Drive Dynamics
             if(lineCount==4){
                 // Drive Power, Drive max RPM, Drive Power Reduction (2 = 2*Power), Drive Gear Reduction (2 = 2 motor rotations for each weapon rotation)
                 // While Drive Power and Drive Gear reductions should be identical in theory, some drive motors include gearboxes that do not have data on the RPM of the motor without the gearbox
-                Drive_Power = lineData[0]/lineData[2];
+                Drive_Power = lineData[0]*lineData[2];
                 Drive_Motor_Max_Omega = lineData[1]/lineData[3];
+                Drive_Motor_Max_Omega = Drive_Motor_Max_Omega*2*M_PI/60;
             }
 
             // Gets the mass and MOI of the entire robot and calculates affect on maximum angular acceleration and velocity per wheel
@@ -268,36 +290,56 @@ int calcProperties(std::string filePath){
                 Robot_Mass = lineData[0];
                 Robot_MOI = lineData[1];
     
-                // Calculates the affect of the weapon on the robot's angular acceleration and maximum angular velocity
+                if(isHorizontal==0.0){
+                // Calculates the affect of the weapon on the robot's angular acceleration and maximum angular velocity 
                 // Torque = MOI * alpha -> alpha_robot = (MOI_Weapon*alpha_weapon)/MOI_Robot
                 robotDynamics.alpha_max_weapon = (Weapon_MOI*robotDynamics.alpha_weapon_max)/Robot_MOI;
                 robotDynamics.alpha_min_weapon = (Weapon_MOI*robotDynamics.alpha_weapon_min)/Robot_MOI;
 
-                // Calculates the affect on the angular velocity of the robot due to the weapon
-                // omega = alpha*time -> time = omega/alpha
-                if(isBidirectional || isClockwise){
-                    spinUpTime = abs(robotDynamics.omega_weapon_max/robotDynamics.alpha_weapon_max);
-                }
-                else{
-                    spinUpTime = abs(robotDynamics.omega_weapon_min/robotDynamics.alpha_weapon_min);
-                }
 
                 // Calculates the maximum and minimum velocity of the robot due to the weapon spin up
-                robotDynamics.omega_max_weapon = spinUpTime*((Weapon_MOI*robotDynamics.alpha_weapon_max)/Robot_MOI);
-                robotDynamics.omega_min_weapon = spinUpTime*((Weapon_MOI*robotDynamics.alpha_weapon_min)/Robot_MOI);
+                robotDynamics.omega_max_weapon = (Weapon_MOI * robotDynamics.omega_weapon_max) / Robot_MOI;
+                robotDynamics.omega_min_weapon = (Weapon_MOI * robotDynamics.omega_weapon_min) / Robot_MOI;
+                }
+                else{
+                    robotDynamics.alpha_max_weapon = 0;
+                    robotDynamics.alpha_min_weapon = 0;
+
+
+                    // Calculates the maximum and minimum velocity of the robot due to the weapon spin up
+                    robotDynamics.omega_max_weapon = 0;
+                    robotDynamics.omega_min_weapon = 0;
+                }
+
+                // // CHECKING
+                // std::cout<<"\n"<<robotDynamics.alpha_max_weapon<<"\n";
+                // std::cout<<"\n"<<robotDynamics.alpha_min_weapon<<"\n";
+                // std::cout<<"\n"<<robotDynamics.omega_max_weapon<<"\n";
+                // std::cout<<"\n"<<robotDynamics.omega_min_weapon<<"\n";
+
             }
 
             // Gets the data for each wheel and then calculates the affect of them on the 
-            else{
+            if(lineCount > 5)
+            {
                 x_wheel = lineData[0];
-                y_wheel = lineData[1];
-                controlChannel = lineData[4];
+                // If the robot is a circle
+                if(isCircle){
+                    y_wheel = lineData[1];
+                }
+                else{
+                    y_wheel = lineData[1] - robotGeometry.robot_height/2;
+                }
 
                 // Calculates alpha =================================================
+                // (Weapon_Power * Weapon_Reduction) / (Weapon_Motor_Max_Omega * Weapon_MOI);
+              
+
                 motor_alpha_max = Drive_Power/(Drive_Motor_Max_Omega*lineData[3]);
+                // std::cout<<"\n"<<motor_alpha_max<<"\n";
                 // Calculates Force
                 force_x = lineData[3]*motor_alpha_max*lineData[2];
-                force_y = 1/4*Robot_Mass*motor_alpha_max*lineData[2];
+                force_y = (1.0/numWheels)*Robot_Mass*motor_alpha_max*lineData[2]*friction_coeff;
                 // Finds direction of the tangent of the force for calculating torque
                 tan_x = -y_wheel/sqrt(y_wheel*y_wheel + x_wheel*x_wheel);
                 tan_y = x_wheel/sqrt(y_wheel*y_wheel + x_wheel*x_wheel);
@@ -305,27 +347,38 @@ int calcProperties(std::string filePath){
                 // Caclulates the force magnitude
                 abs_force = abs(force_x*tan_x + force_y*tan_y);
 
-
+                // Right drive
+                if(lineData[4]==2.0){
+                robotDynamics.alpha_min_r_drive = robotDynamics.alpha_min_r_drive - abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
+                robotDynamics.alpha_max_r_drive = robotDynamics.alpha_max_r_drive + abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
+                }
                 // Left Drive
-                if(controlChannel == 1){
-                    // Calculates the maximum acceleration due to the drive
+                else{
                     robotDynamics.alpha_min_l_drive = robotDynamics.alpha_min_l_drive - abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
                     robotDynamics.alpha_max_l_drive = robotDynamics.alpha_max_l_drive + abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
-                }
-                // Right Drive
-                else{
-                    // Calculates the maximum acceleration due to the drive
-                    robotDynamics.alpha_min_r_drive = robotDynamics.alpha_min_r_drive - abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
-                    robotDynamics.alpha_max_r_drive = robotDynamics.alpha_max_r_drive + abs(abs_force*sqrt(y_wheel*y_wheel + x_wheel*x_wheel))/Robot_MOI;
-                }
-
+                    }
                 // Calculates the maximum acceleration of the robot (will be averaged later)
-                robotDynamics.acceleration_max = robotDynamics.acceleration_max + abs(motor_alpha_max*lineData[2]);
-                robotDynamics.acceleration_min = robotDynamics.acceleration_min - abs(motor_alpha_max*lineData[2]);
+                robotDynamics.acceleration_max = robotDynamics.acceleration_max + abs(motor_alpha_max*lineData[2]*friction_coeff);
+                robotDynamics.acceleration_min = robotDynamics.acceleration_min - abs(motor_alpha_max*lineData[2]*friction_coeff);
 
                 // Calculates the maximum speed of the robot (will be averaged later)
                 robotDynamics.velocity_max =  robotDynamics.velocity_max + abs(lineData[2]*Drive_Motor_Max_Omega);
                 robotDynamics.velocity_min =  robotDynamics.velocity_min - abs(lineData[2]*Drive_Motor_Max_Omega);
+
+                // Calculates the maximum angular speed of the robot (will be averaged later)
+                robotDynamics.omega_max_l_drive = robotDynamics.omega_max_l_drive + (2*Drive_Motor_Max_Omega*lineData[2])/(x_wheel*2);
+                robotDynamics.omega_min_l_drive = robotDynamics.omega_min_l_drive - (2*Drive_Motor_Max_Omega*lineData[2])/(x_wheel*2);
+                robotDynamics.omega_max_r_drive = robotDynamics.omega_max_r_drive + (2*Drive_Motor_Max_Omega*lineData[2])/(x_wheel*2);
+                robotDynamics.omega_min_r_drive = robotDynamics.omega_min_r_drive - (2*Drive_Motor_Max_Omega*lineData[2])/(x_wheel*2);
+
+                // Checking WORKS
+                // std::cout<<"\n";
+                // std::cout<<robotDynamics.alpha_min_l_drive <<"\n";
+                // std::cout<<robotDynamics.alpha_max_l_drive <<"\n";
+                // std::cout<<robotDynamics.alpha_max_r_drive <<"\n";
+                // void printGeometry(const geometry& model)std::cout<<robotDynamics.alpha_min_r_drive <<"\n";
+                // std::cout<<"\n";
+
 
 
             }
@@ -339,13 +392,15 @@ int calcProperties(std::string filePath){
         // Calculates the maximum and minimum rotational velocity due to the drive
         // left motor
         
-        drive_spin_up = Drive_Motor_Max_Omega/robotDynamics.alpha_max_l_drive;
-        robotDynamics.omega_max_l_drive = drive_spin_up*robotDynamics.alpha_max_l_drive;
-        // std::cout<<"\n" << "Left Motor Omega" <<": Success\n";
+        robotDynamics.omega_max_l_drive = robotDynamics.omega_max_l_drive/(lineCount-5);
+        robotDynamics.omega_min_l_drive = robotDynamics.omega_min_l_drive/(lineCount-5);
 
         // right motor
-        drive_spin_up = Drive_Motor_Max_Omega/robotDynamics.alpha_max_r_drive;
-        robotDynamics.omega_max_r_drive = drive_spin_up*robotDynamics.alpha_max_r_drive;
+        robotDynamics.omega_max_r_drive = robotDynamics.omega_max_r_drive/(lineCount-5);
+        robotDynamics.omega_min_r_drive = robotDynamics.omega_min_r_drive/(lineCount-5);
+
+
+
 
         // std::cout<<"\n" << "Right Motor Omega" <<": Success\n";
 
@@ -361,13 +416,29 @@ int calcProperties(std::string filePath){
         robotDynamics.velocity_min = robotDynamics.velocity_min/(lineCount-5);
         robotDynamics.velocity_max = robotDynamics.velocity_max/(lineCount-5);
 
+        // Finds the maximum angular acceleration of the system
+        robotDynamics.alpha_max = robotDynamics.alpha_max_l_drive+robotDynamics.alpha_max_r_drive+robotDynamics.alpha_max_weapon;
+        robotDynamics.alpha_min = robotDynamics.alpha_min_l_drive+robotDynamics.alpha_min_r_drive+robotDynamics.alpha_min_weapon;
 
+        // Track width: distance between left and right wheels
+        double track_width = isCircle ? robotGeometry.robot_radius * 2.0 : robotGeometry.robot_width;
+
+        // Compute angular velocity due to differential drive
+        robotDynamics.omega_max = ((robotDynamics.velocity_max + robotDynamics.velocity_min) / track_width)+robotDynamics.omega_max_weapon;
+        robotDynamics.omega_min = ((robotDynamics.velocity_min - robotDynamics.velocity_max) / track_width)+robotDynamics.omega_min_weapon;
+
+
+
+        RobotModel.robotDynamics = robotDynamics;
+        RobotModel.robotGeometry = robotGeometry;
 
     } else {
         std::cerr << "Unable to open file" << std::endl;
+        
     }
-
-    return 0;
+    printDynamics(robotDynamics);
+    printGeometry(robotGeometry);
+    return RobotModel;
 }
 
 
@@ -409,7 +480,7 @@ int main(int /* argc */, char ** /* argv */)
     filePath = filePath + robot;
 
     // gets the data needed for creating a kinodynamic model from the inputted file
-    auto robotDynamics = calcProperties(filePath);
+    RobotModel model = calcProperties(filePath);
 
 
    

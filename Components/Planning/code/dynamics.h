@@ -83,3 +83,13 @@ struct geometry{
     float weapon_radius;
 };
 
+
+struct RobotModel {
+    dynamics robotDynamics;
+    geometry robotGeometry;
+};
+
+
+void printDynamics(const dynamics& model);
+
+void printGeometry(const geometry& model);
