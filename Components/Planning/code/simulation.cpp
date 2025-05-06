@@ -8,7 +8,6 @@
 #include <ompl/base/spaces/SE2StateSpace.h>
 #include <ompl/base/ScopedState.h>
 #include <ompl/base/SpaceInformation.h>
-#include <iostream>
 
 
 
@@ -30,6 +29,13 @@
 namespace ob = ompl::base;
 namespace oc = ompl::control;
 
+// Global Variables
+RobotModel model;
+Obstacles obstacles;
+Opponent opponent;
+Coordinate start;
+Arena arena;
+
 // Constant Values
 const float friction_coeff = 0.75; //Coefficient of friction between robot wheels and the arena, find for your specific arena
 
@@ -41,6 +47,110 @@ const float friction_coeff = 0.75; //Coefficient of friction between robot wheel
 #elif defined(__APPLE__)
     #include <mach-o/dyld.h>
 #endif
+
+
+class RobotProjection : public ob::ProjectionEvaluator
+{
+public:
+    RobotProjection(const ob::StateSpace *space,
+                    RobotModel const    &model,
+                    Arena const         &arena)
+      : ob::ProjectionEvaluator(space)
+      , model_(model)
+      , arena_(arena)
+    {
+    }
+
+    unsigned int getDimension() const override
+    {
+        // x, y, θ, v, ω, ω_weapon
+        return 6;
+    }
+
+    void project(const ob::State *state,
+                 Eigen::Ref<Eigen::VectorXd> projection) const override
+    {
+        // 1) Cast to CompoundState
+        const auto *compound =
+            state->as<ob::CompoundStateSpace::StateType>();
+
+        // 2) Subspace 0 = SE(2): extract x,y,θ
+        const auto *se2 =
+            compound->as<ob::SE2StateSpace::StateType>(0);
+        double x     = se2->getX();
+        double y     = se2->getY();
+        double theta = se2->getYaw();
+
+        // 3) Subspace 1 = RealVector(3): [v, ω, ω_weapon]
+        //    Here we’re assuming you packed them as [v, ω, ω_w]
+        const auto *rv =
+            compound->as<ob::RealVectorStateSpace::StateType>(1);
+        double v       = rv->values[0];
+        double omega   = rv->values[1];
+        double omega_w = rv->values[2];
+
+        // 4) Fill projection (normalized into [–1,1] or [0,1] as you like)
+        projection.resize(getDimension());
+        projection(0) = x       / arena_.width;
+        projection(1) = y       / arena_.length;
+        projection(2) = theta   / M_PI;
+        projection(3) = v       / model_.robotDynamics.velocity_max;
+
+        double wmax = std::max(std::abs(model_.robotDynamics.omega_max),
+                               std::abs(model_.robotDynamics.omega_min));
+        projection(4) = omega   / wmax;
+
+        double wmmax = std::max(std::abs(model_.robotDynamics.omega_weapon_max),
+                                std::abs(model_.robotDynamics.omega_weapon_min));
+        projection(5) = omega_w / wmmax;
+    }
+
+private:
+    RobotModel model_;
+    Arena      arena_;
+};
+
+void robotODE(const ompl::control::ODESolver::StateType &q, const ompl::control::Control *control,
+            ompl::control::ODESolver::StateType &qdot)
+{
+    // TODO: Fill in the ODE for the car's dynamics
+    const double *controls = control->as<ompl::control::RealVectorControlSpace::ControlType>()->values;
+    double u1 = controls[0]; //Left Drive
+    double u2 = controls[1]; //Right Drive
+    double u3 = controls[2]; //Weapon Drive
+
+    // Current State (q)
+    double x        = q[0];
+    double y        = q[1];
+    double theta    = q[2];
+    double v       = q[3];
+    double omega    = q[4];
+    double omega_w  = q[5];
+
+    // Current velocity (qdot)
+    qdot.resize(6);
+    qdot[0] = v*cos(theta); //vX
+    qdot[1] = v*sin(theta); //vY
+    qdot[2] = omega; //omega
+    qdot[3] = model.robotDynamics.acceleration_max*((u1+u2)/2);// a
+
+    // Calculating Alpha of the robot
+    if(model.robotDynamics.alpha_max_weapon > 0){
+        qdot[4] = u1*model.robotDynamics.alpha_max_l_drive + u2*model.robotDynamics.alpha_max_r_drive  +  u3*model.robotDynamics.alpha_max_weapon;//alpha
+    }
+    else{
+        qdot[4] = u1*model.robotDynamics.alpha_max_l_drive + u2*model.robotDynamics.alpha_max_r_drive  +  u3*model.robotDynamics.alpha_min_weapon;//alpha
+    }
+
+    // Calculating alpha of the weapon
+    if(model.robotDynamics.alpha_weapon_max > 0){
+        qdot[5] = u3*model.robotDynamics.alpha_weapon_max;
+    }
+    else{
+        qdot[5] = u3*model.robotDynamics.alpha_weapon_min;
+    }
+
+}
 
 std::string getExecutableDir() {
     char buffer[1024];
@@ -444,7 +554,7 @@ RobotModel calcProperties(std::string filePath){
     return RobotModel;
 }
 
-ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Opponent op, Arena a)
+ompl::control::SimpleSetupPtr createRobot()
 {
     // stateSpace (x,y,theta),(vx,vy,omega),(ax,ay,alpha), (omega_weapon, alpha_weapon) =======================================
     auto stateSpace = std::make_shared<ompl::base::CompoundStateSpace>();  
@@ -454,59 +564,31 @@ ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Oppone
     ob::RealVectorBounds cartesianBounds(2);
     // x and y bounds are based off of the arena
     // x bounds
-    cartesianBounds.setHigh(0,a.width);
+    cartesianBounds.setHigh(0,arena.width);
     cartesianBounds.setLow(0,0);
     // y bounds
-    cartesianBounds.setHigh(1,a.length);
+    cartesianBounds.setHigh(1,arena.length);
     cartesianBounds.setLow(1,0);
     // Theta bounds wrap arround in SE2 space so no more required
     cartesian->setBounds(cartesianBounds);
     // velocity subspace (vx,vy,omega) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     auto velocity = std::make_shared<ob::RealVectorStateSpace>(3);
     ob::RealVectorBounds velocityBounds(3);
-    // vx and vy bounds are based on the max and minimum velocity
-    // vx Bounds
+    // v bounds are based on the max and minimum velocity
     velocityBounds.setHigh(0,model.robotDynamics.velocity_max);
     velocityBounds.setLow(0,model.robotDynamics.velocity_min);
-    // vy Bounds
-    velocityBounds.setHigh(1,model.robotDynamics.velocity_max);
-    velocityBounds.setLow(1,model.robotDynamics.velocity_min);
-    // omega bounds
-    velocityBounds.setHigh(2,model.robotDynamics.omega_max);
-    velocityBounds.setLow(2,model.robotDynamics.omega_min);
+    // omega bounds based on the max and in angular velocity
+    velocityBounds.setHigh(1,model.robotDynamics.omega_max);
+    velocityBounds.setLow(1,model.robotDynamics.omega_min);
+    // omega_robot based on the max and min angular velocity of the robot's weapon
+    velocityBounds.setHigh(0,model.robotDynamics.omega_weapon_max);
+    velocityBounds.setLow(0,model.robotDynamics.omega_weapon_min);
     // Applies bounds to velocity
     velocity->setBounds(velocityBounds);
-    // acceleration subspace (ax,ay,alpha) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    auto acceleration = std::make_shared<ob::RealVectorStateSpace>(3);
-    ob::RealVectorBounds accelerationBounds(3);
-    // ax and ay bounds are based on the max and min acceleration
-    // ax bounds
-    accelerationBounds.setHigh(0,model.robotDynamics.acceleration_max);
-    accelerationBounds.setLow(0,model.robotDynamics.acceleration_min);
-    // ay bounds
-    accelerationBounds.setHigh(1,model.robotDynamics.acceleration_max);
-    accelerationBounds.setLow(1,model.robotDynamics.acceleration_min);
-    // alpha bounds
-    accelerationBounds.setHigh(2,model.robotDynamics.alpha_max);
-    accelerationBounds.setLow(2,model.robotDynamics.alpha_min);
-    // applies bounds to acceleartion
-    acceleration->setBounds(accelerationBounds);
-    // weapon data subspace (weapon_omega, weapon_alpha)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    auto weapon = std::make_shared<ob::RealVectorStateSpace>(2);
-    ob::RealVectorBounds weaponBounds(2);
-    // weapon bounds based on weapon's min and max angular velocity and acceleration
-    // Weapon angular velocity
-    weaponBounds.setHigh(0,model.robotDynamics.omega_weapon_max);
-    weaponBounds.setLow(0,model.robotDynamics.omega_weapon_min);
-    // Weapon angular acceleration
-    weaponBounds.setHigh(1,model.robotDynamics.alpha_weapon_max);
-    weaponBounds.setLow(1,model.robotDynamics.alpha_weapon_min);
     // Applies subspaces to robot space ---------------------------------------------------
     stateSpace->addSubspace(cartesian,1.0);
     stateSpace->addSubspace(velocity,1.0);
-    stateSpace->addSubspace(acceleration,1.0);
-    stateSpace->addSubspace(weapon,1.0);
-
+    
     // Control Space (leftDrive,rightDrive,weaponDrive) ======================================================================
     auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace,3);
     ob::RealVectorBounds controlBounds(3);
@@ -530,32 +612,34 @@ ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Oppone
 
     // Creating a state info object
     auto si = std::make_shared<oc::SimpleSetup>(controlSpace);
-   
+
+    auto odeSolver = std::make_shared<oc::ODEBasicSolver<>>(si->getSpaceInformation(), &robotODE);
+
+    // Sets State Propagator
+    si->getSpaceInformation()->setStatePropagator(oc::ODESolver::getStatePropagator(odeSolver));
+
+    Obstacles ob = obstacles;
+    Opponent op = opponent;
+    RobotModel m = model;
+    Arena a = arena;
+    si->setStateValidityChecker([ob, op, m, a](const ob::State *state) {
+        // Get the compound state
+        const auto *compoundState = state->as<ob::CompoundStateSpace::StateType>();
+        if (!compoundState) return false;
+        
+        // Get the SE2 component (first subspace - index 0)
+        const auto* se2State = compoundState->as<ob::SE2StateSpace::StateType>(0);
+        
+        // Extract position and orientation
+        double x = se2State->getX();
+        double y = se2State->getY();
+        double theta = se2State->getYaw();
+        
+        // Call the validity function
+        return checkIfRobotValid(m, op, ob, x, y, theta, a);
+    });
     
-
-
-
-//     // Creates a state info object
-//     auto ss = std::make_shared<oc::SimpleSetup>(controlSpace);
-
-//     // Creates an ODE checker
-//     auto odeSolver = std::make_shared<oc::ODEBasicSolver<>>(ss->getSpaceInformation(), &carODE);
-
-//     // Sets State Propagator
-//     ss->getSpaceInformation()->setStatePropagator(oc::ODESolver::getStatePropagator(odeSolver));
-
-//     // Sets validity checker
-//     ss->setStateValidityChecker([&obstacles](const ob::State *state) {
-//         const auto *data = state->as<ob::RealVectorStateSpace::StateType>()->values;
-//         if (!data) return false;
-//         double x = data[0];
-//         double y = data[1];
-//         double theta = data[2];
-//         double sLength = 0.4;
-//         return isValidSquare(x, y, theta, sLength, obstacles);
-//     });
-    
-//     return ss;
+    return si;
 }
 
 
@@ -597,7 +681,7 @@ int main(int /* argc */, char ** /* argv */)
     filePath = filePath + robot;
 
     // gets the data needed for creating a kinodynamic model from the inputted file
-    RobotModel model = calcProperties(filePath);
+    model = calcProperties(filePath);
 
     // Choose the arena for the robot to fight in
     int arenaChoice;
@@ -610,21 +694,20 @@ int main(int /* argc */, char ** /* argv */)
 
         std::cin >> arenaChoice;
     } while (arenaChoice < 1 || arenaChoice > 3);
-    Arena robotArena;
     if(arenaChoice == 1){
-        robotArena.length = 2.438;
-        robotArena.width = 2.438;
+        arena.length = 2.438;
+        arena.width = 2.438;
     }
     else{
         if(arenaChoice == 2){
-            robotArena.length = 10;
-            robotArena.width = 10;
+            arena.length = 10;
+            arena.width = 10;
         }
         else{
             std::cout<<"What width do you want the arena to be?" << std::endl;
-            std::cin >> robotArena.width;
+            std::cin >> arena.width;
             std::cout<<"What length do you want the arena to be?" << std::endl;
-            std::cin >> robotArena.length;
+            std::cin >> arena.length;
         }
     }
     int obstacleChoice;
@@ -640,7 +723,6 @@ int main(int /* argc */, char ** /* argv */)
         std::cin >> obstacleChoice;
     } while (obstacleChoice < 1 || obstacleChoice > 4);
     // Maximum obstacle size is determined by a housebot's size i.e. 0.3 m. max speed is 9m/s
-    Obstacles obstacles;
     int numDynamic=0;
     int numStatic=0;
     if(obstacleChoice==1){
@@ -663,13 +745,13 @@ int main(int /* argc */, char ** /* argv */)
             }
         }
     }
-    obstacles = generateObstacles(robotArena,numStatic,numDynamic);
+    obstacles = generateObstacles(arena,numStatic,numDynamic);
 
-    Opponent opponent = generateOpponent(robotArena,obstacles);
+    opponent = generateOpponent(arena,obstacles);
 
-    Coordinate start = generateStartingPosition(robotArena,obstacles,opponent,model);
+    start = generateStartingPosition(arena,obstacles,opponent,model);
 
-
+    ompl::control::SimpleSetupPtr si = createRobot();
    
 
     

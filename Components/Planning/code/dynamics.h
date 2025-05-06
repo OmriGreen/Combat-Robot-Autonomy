@@ -27,11 +27,11 @@ struct dynamics{
     float alpha_max_weapon=0;
     float alpha_min_weapon=0;
     // Due to left drive ````````````````````````````````````````````````
-    float alpha_max_r_drive=0;
-    float alpha_min_r_drive=0;
-    // Due to right drive ```````````````````````````````````````````````
     float alpha_max_l_drive=0;
     float alpha_min_l_drive=0;
+    // Due to right drive ```````````````````````````````````````````````
+    float alpha_max_r_drive=0;
+    float alpha_min_r_drive=0;
 
     // Velocity ========================================================
     // Velocity of individual parts ------------------------------------
