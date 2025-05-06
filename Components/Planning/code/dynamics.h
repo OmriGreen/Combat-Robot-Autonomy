@@ -89,6 +89,11 @@ struct RobotModel {
     geometry robotGeometry;
 };
 
+struct Coordinate{
+    float x;
+    float y;
+    float theta;
+};
 
 void printDynamics(const dynamics& model);
 

@@ -21,7 +21,6 @@
 
 
 // Custom Imports
-#include "dynamics.h"
 #include "CollisionChecking.h"
 
 namespace ob = ompl::base;
@@ -436,8 +435,8 @@ RobotModel calcProperties(std::string filePath){
         std::cerr << "Unable to open file" << std::endl;
         
     }
-    printDynamics(robotDynamics);
-    printGeometry(robotGeometry);
+    // printDynamics(robotDynamics);
+    // printGeometry(robotGeometry);
     return RobotModel;
 }
 
@@ -481,6 +480,38 @@ int main(int /* argc */, char ** /* argv */)
 
     // gets the data needed for creating a kinodynamic model from the inputted file
     RobotModel model = calcProperties(filePath);
+
+    // Choose the arena for the robot to fight in
+    int arenaChoice;
+    do
+    {
+        std::cout << "What Arena do you want the robot to fight in" << std::endl;
+        std::cout << " (1) 3lb Robot Arena NHRL" << std::endl;
+        std::cout << " (2) 12lb/30lb Robot Arena NHRL" << std::endl;
+        std::cout << " (3) Custom Arena" << std::endl;
+
+        std::cin >> arenaChoice;
+    } while (arenaChoice < 1 || arenaChoice > 3);
+    Arena robotArena;
+    if(arenaChoice == 1){
+        robotArena.length = 2.438;
+        robotArena.width = 2.438;
+    }
+    else{
+        if(arenaChoice == 2){
+            robotArena.length = 10;
+            robotArena.width = 10;
+        }
+        else{
+            std::cout<<"What width do you want the arena to be?" << std::endl;
+            std::cin >> robotArena.width;
+            std::cout<<"What length do you want the arena to be?" << std::endl;
+            std::cin >> robotArena.length;
+        }
+    }
+
+    // Generates Obstacles based on basic inputs
+
 
 
    
