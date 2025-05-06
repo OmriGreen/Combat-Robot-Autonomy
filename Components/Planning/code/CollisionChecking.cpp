@@ -161,6 +161,8 @@ Opponent updateOpponent(Opponent o, Arena arena, float timeInterval){
         return o;
 }
 
+// DETECTS COLLISIONS WITH THE ARENA ===============================================
+
 // Checks if a point on a square robot is not within a arena (True if in a invalid location)
 bool checkIfPointInvalidSquare(Arena a, Coordinate c){
     // If the point is outside of the arena return true
@@ -230,13 +232,18 @@ std::vector<Coordinate> getCorners(Coordinate c, float width, float height, floa
     return corners;
 }
 
-// Returns true if the position is valid, false otherwise
-bool checkPositionValid(RobotModel robot, Arena a, float x, float y, float theta){
+// Returns true if the position is invalid, true otherwise
+bool checkPositionInvalid(RobotModel robot, Arena a, float x, float y, float theta){
     geometry r = robot.robotGeometry;
     Coordinate c;
     c.x = x;
     c.y = y;
     c.theta = theta;
+
+     // If a robot is not a circle the y distance is measured from the back middle
+     if(r.robot_radius == -1){
+        c.y = c.y + r.robot_height/2;
+    } 
 
     // Checking the main body of the robot ========================================
     // If the robot is not a circle
@@ -245,20 +252,243 @@ bool checkPositionValid(RobotModel robot, Arena a, float x, float y, float theta
         // Checks if every vertice is inside of the arena and if not returns false
         for(int i = 0; i <4; i++){
             if(checkIfPointInvalidSquare(a,vertices[i])){
-                return false;
+                return true;
             }
         }
     }
     // If the main body of the robot is a circle
     else{
         if(checkIfPointInvalidRound(a,c,r.robot_radius)){
-            return false;
+            return true;
         }
     }
 
     // Checking the weapon of the robot ==============================================
-    
+    // If the robot's weapon is not a horizontal
+    if(r.weapon_radius == -1){
+
+        std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, r.weapon_x, r.weapon_y);
+        // Checks if every vertice is inside of the arena and if not returns false
+        for(int i = 0; i <4; i++){
+            if(checkIfPointInvalidSquare(a,vertices[i])){
+                return true;
+            }
+        }
+    }
+    else{
+        // If the robot's weapon is a horizontal
+        c.x = c.x + r.weapon_x * cos(theta) - r.weapon_y*sin(theta);
+        c.y = c.y + r.weapon_x * sin(theta) + r.weapon_y*cos(theta);
+        if(checkIfPointInvalidRound(a,c,r.weapon_radius)){
+            return true;
+        }
+
+    }
+
+    // Position is valid
+    return false;
 }
 
+// CHECK COLLISIONS WITH OBSTACLES ==================================================
+// Checks if a point is in a obstacle, returns true in an invalid location
+bool checkIfPointInObstacles(Obstacles ob, Coordinate c, float r){
+    float dist;
+    // Checks Dynamic obstacles
+    for (auto& o : ob.dynamicObstacles) {
+        // Distance betweem edges of the obstacle and the robot or weapoin
+        dist = sqrt((o.x-c.x)*(o.x-c.x)-(o.y-c.y)*(o.y-c.y))-o.radius-r;
+
+        // If the distance is less than 0 it means it is intersecting
+        if(dist < 0){
+            return true;
+        }
+    }
+    // Checks Static Obstacles
+    for (auto& o : ob.staticObstacles) {
+        // Distance betweem edges of the obstacle and the robot or weapon
+        dist = sqrt((o.x-c.x)*(o.x-c.x)-(o.y-c.y)*(o.y-c.y))-o.radius-r;
+
+        // If the distance is less than 0 it means it is intersecting
+        if(dist < 0){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Checks if the robot or weapon hit an obstacle
+bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotModel robot){
+    geometry r = robot.robotGeometry;
+    Coordinate c;
+    c.x = x;
+    c.y = y;
+    c.theta = theta;
+
+     // If a robot is not a circle the y distance is measured from the back middle
+     if(r.robot_radius == -1){
+        c.y = c.y + r.robot_height/2;
+    } 
 
 
+     // Checking the main body of the robot ========================================
+    // If the robot is not a circle
+    if(r.robot_radius == -1){
+        std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, 0, 0);
+        // Checks if every vertice is inside of the arena and if not returns false
+        for(int i = 0; i <4; i++){
+            if(checkIfPointInObstacles(ob,vertices[i],0)){
+                return true;
+            }
+        }
+    }
+    // If the main body of the robot is a circle
+    else{
+        if(checkIfPointInObstacles(ob,c,r.robot_radius)){
+            return true;
+        }
+    }
+
+     // Checking the weapon of the robot ==============================================
+    // If the robot's weapon is not a horizontal
+    if(r.weapon_radius == -1){
+
+        std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, r.weapon_x, r.weapon_y);
+        // Checks if any vertice hit an obstacle and if so returns true
+        for(int i = 0; i <4; i++){
+            if(checkIfPointInObstacles(ob,vertices[i],0)){
+                return true;
+            }
+        }
+    }
+    else{
+        // If the robot's weapon is a horizontal
+        c.x = c.x + r.weapon_x * cos(theta) - r.weapon_y*sin(theta);
+        c.y = c.y + r.weapon_x * sin(theta) + r.weapon_y*cos(theta);
+        if(checkIfPointInObstacles(ob,c,r.weapon_radius)){
+            return true;
+        }
+
+    }
+
+    // Position is valid
+    return false;
+
+}
+
+// CHECK COLLISIONS WITH OPPONENT ===================================================
+// Checks if a point in the robot hit an opponent
+bool checkIfPointInOpponent(Opponent o, Coordinate c, float r){
+    float dist;
+    // Distance betweem edges of the obstacle and the robot or weapoin
+    dist = sqrt((o.x-c.x)*(o.x-c.x)-(o.y-c.y)*(o.y-c.y))-o.radius-r;
+
+    // If the distance is less than 0 it means it is intersecting
+    if(dist < 0){
+        return true;
+    }
+
+    return false;    
+}
+
+// Checks if the robot's main body hit an opponent (NOT GOAL SHOULD BE AVOIDED)
+bool checkIfBodyInOpponent(Opponent o, float x, float y, float theta, RobotModel robot){
+    geometry r = robot.robotGeometry;
+    Coordinate c;
+    c.x = x;
+    c.y = y;
+    c.theta = theta;
+
+     // If a robot is not a circle the y distance is measured from the back middle
+     if(r.robot_radius == -1){
+        c.y = c.y + r.robot_height/2;
+    } 
+
+
+     // Checking the main body of the robot ========================================
+    // If the robot is not a circle
+    if(r.robot_radius == -1){
+        std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, 0, 0);
+        // Checks if every vertice is inside of the arena and if not returns false
+        for(int i = 0; i <4; i++){
+            if(checkIfPointInOpponent(o,vertices[i],0)){
+                return true;
+            }
+        }
+    }
+    // If the main body of the robot is a circle
+    else{
+        if(checkIfPointInOpponent(o,c,r.robot_radius)){
+            return true;
+        }
+    }
+
+    // The main body of the robot DID NOT hit the opponent
+    return false;
+}
+
+// Checks if the robot's weapon impacted the opponent (VICTORY CONDITION)
+bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotModel robot){
+    geometry r = robot.robotGeometry;
+    Coordinate c;
+    c.x = x;
+    c.y = y;
+    c.theta = theta;
+
+     // If a robot is not a circle the y distance is measured from the back middle
+     if(r.robot_radius == -1){
+        c.y = c.y + r.robot_height/2;
+    } 
+
+     // Checking the weapon of the robot ==============================================
+    // If the robot's weapon is not a horizontal
+    if(r.weapon_radius == -1){
+
+        std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, r.weapon_x, r.weapon_y);
+        // Checks if any vertice hit an obstacle and if so returns true
+        for(int i = 0; i <4; i++){
+            if(checkIfPointInOpponent(o,vertices[i],0)){
+                return true;
+            }
+        }
+    }
+    else{
+        // If the robot's weapon is a horizontal
+        c.x = c.x + r.weapon_x * cos(theta) - r.weapon_y*sin(theta);
+        c.y = c.y + r.weapon_x * sin(theta) + r.weapon_y*cos(theta);
+        if(checkIfPointInOpponent(o,c,r.weapon_radius)){
+            return true;
+        }
+
+    }
+
+    // Robot didn't hit opponent with its weapon
+    return false;
+}
+
+// FINAL COLLISION DETECTION CODE ================================
+bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, float x, float y, float theta, Arena arena){
+    // Checks if the robot is not within the arena and if so the robot is in a invalid position
+    if(checkPositionInvalid(robot,arena,x,y,theta)){
+        return false;
+    }
+
+    // Checks if the robot hit a obstacle and if so the robot is in an invalid position
+    if(checkIfRobotHitObstacle(obstacles, x, y, theta, robot)){
+        return false;
+    }
+
+    // If a robot's weapon hit an opponent and its body hit the opponent the position is ALWAYS valid (Opponent WILL be knowcked back)
+    if(checkIfWeaponInOpponent(opponent,x,y,theta,robot)){
+        return true;
+    }
+    else{
+        // If a robot's weapon DID NOT hit an opponent and it has hit the opponent the position is NOT valid (Likely means hit by the opponent)
+        if(checkIfBodyInOpponent(opponent,x,y,theta,robot)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}

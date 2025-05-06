@@ -61,6 +61,8 @@ Obstacles updateObstacles(Obstacles prevObstacles, Arena arena, float timeInterv
 // Updates opponent location based on time
 Opponent updateOpponent(Opponent prevOpponent, Arena arena, float timeInterval=0.01);
 
+// DETECTING ARENA COLLISIONS ========================================================================
+
 // Checks if a point on a square weapon or robot is not within a arena (True if in a invalid location)
 bool checkIfPointInvalidSquare(Arena a,Coordinate c);
 
@@ -70,8 +72,29 @@ bool checkIfPointInvalidRound(Arena a, Coordinate c, float radius);
 // Gets all 4 points on a square weapon or robot for testing
 std::vector<Coordinate> getCorners(Coordinate c,float theta, float width, float height, float x_w, float y_w);
 
-// Checks is a robot is within the arena (True means it is in a valid location)
-bool checkPositionValid(RobotModel robot, Arena a, float x, float y, float theta);
+// Checks is a robot is not within the arena (True means it is in a invalid location)
+bool checkPositionInvalid(RobotModel robot, Arena a, float x, float y, float theta);
+
+// DETECTING OBSTACLE COLLISIONS ========================================================================
+
+// Checks if a point in the robot hit an obstacle
+bool checkIfPointInObstacles(Obstacles ob, Coordinate c, float r);
+
+// Checks if a robot hit an obstacle
+bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotModel robot);
+
+// DETECTING OPPONENT COLLISIONS ======================================================================
+
+// Checks if a point in the robot hit an opponent
+bool checkIfPointInOpponent(Opponent o, Coordinate c, float r);
+
+// Checks if the robot's main body hit an opponent (NOT GOAL SHOULD BE AVOIDED)
+bool checkIfBodyInOpponent(Opponent o, float x, float y, float theta, RobotModel robot);
+
+// Checks if the robot's weapon impacted the opponent (VICTORY CONDITION)
+bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotModel robot);
 
 
+// TYING EVERYTHING TOGETHER TO FIND INVALID POSITIONS ===========================================
+bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, float x, float y, float theta);
 
