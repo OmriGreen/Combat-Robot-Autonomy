@@ -5,6 +5,10 @@
 #include <ompl/base/spaces/RealVectorStateSpace.h>
 #include <ompl/control/spaces/RealVectorControlSpace.h>
 #include <ompl/tools/benchmark/Benchmark.h>
+#include <ompl/base/spaces/SE2StateSpace.h>
+#include <ompl/base/ScopedState.h>
+#include <ompl/base/SpaceInformation.h>
+#include <iostream>
 
 
 
@@ -440,6 +444,125 @@ RobotModel calcProperties(std::string filePath){
     return RobotModel;
 }
 
+ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Opponent op, Arena a)
+{
+    // robotSpace (x,y,theta),(vx,vy,omega),(ax,ay,alpha), (omega_weapon, alpha_weapon) =======================================
+    auto stateSpace = std::make_shared<ompl::base::CompoundStateSpace>();  
+    // Making subspaces --------------------------------------------
+    // cartesian subspace (x,y,theta) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    auto cartesian = std::make_shared<ob::SE2StateSpace>();
+    ob::RealVectorBounds cartesianBounds(2);
+    // x and y bounds are based off of the arena
+    // x bounds
+    cartesianBounds.setHigh(0,a.width);
+    cartesianBounds.setLow(0,0);
+    // y bounds
+    cartesianBounds.setHigh(1,a.length);
+    cartesianBounds.setLow(1,0);
+    // Theta bounds wrap arround in SE2 space so no more required
+    cartesian->setBounds(cartesianBounds);
+    // velocity subspace (vx,vy,omega) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    auto velocity = std::make_shared<ob::RealVectorStateSpace>(3);
+    ob::RealVectorBounds velocityBounds(3);
+    // vx and vy bounds are based on the max and minimum velocity
+    // vx Bounds
+    velocityBounds.setHigh(0,model.robotDynamics.velocity_max);
+    velocityBounds.setLow(0,model.robotDynamics.velocity_min);
+    // vy Bounds
+    velocityBounds.setHigh(1,model.robotDynamics.velocity_max);
+    velocityBounds.setLow(1,model.robotDynamics.velocity_min);
+    // omega bounds
+    velocityBounds.setHigh(2,model.robotDynamics.omega_max);
+    velocityBounds.setLow(2,model.robotDynamics.omega_min);
+    // Applies bounds to velocity
+    velocity->setBounds(velocityBounds);
+    // acceleration subspace (ax,ay,alpha) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    auto acceleration = std::make_shared<ob::RealVectorStateSpace>(3);
+    ob::RealVectorBounds accelerationBounds(3);
+    // ax and ay bounds are based on the max and min acceleration
+    // ax bounds
+    accelerationBounds.setHigh(0,model.robotDynamics.acceleration_max);
+    accelerationBounds.setLow(0,model.robotDynamics.acceleration_min);
+    // ay bounds
+    accelerationBounds.setHigh(1,model.robotDynamics.acceleration_max);
+    accelerationBounds.setLow(1,model.robotDynamics.acceleration_min);
+    // alpha bounds
+    accelerationBounds.setHigh(2,model.robotDynamics.alpha_max);
+    accelerationBounds.setLow(2,model.robotDynamics.alpha_min);
+    // applies bounds to acceleartion
+    acceleration->setBounds(accelerationBounds);
+    // weapon data subspace (weapon_omega, weapon_alpha)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    auto weapon = std::make_shared<ob::RealVectorStateSpace>(2);
+    ob::RealVectorBounds weaponBounds(2);
+    // weapon bounds based on weapon's min and max angular velocity and acceleration
+    // Weapon angular velocity
+    weaponBounds.setHigh(0,model.robotDynamics.omega_weapon_max);
+    weaponBounds.setLow(0,model.robotDynamics.omega_weapon_min);
+    // Weapon angular acceleration
+    weaponBounds.setHigh(1,model.robotDynamics.alpha_weapon_max);
+    weaponBounds.setLow(1,model.robotDynamics.alpha_weapon_min);
+    // Applies subspaces to robot space ---------------------------------------------------
+    stateSpace->addSubspace(cartesian,1.0);
+    stateSpace->addSubspace(velocity,1.0);
+    stateSpace->addSubspace(acceleration,1.0);
+    stateSpace->addSubspace(weapon,1.0);
+
+   
+    
+
+//     // TODO: Create and setup the car's state space, control space, validity checker, everything you need for planning.
+//     // (x,y,theta,v)
+//     auto stateSpace = std::make_shared<ob::RealVectorStateSpace>(4);
+//     ob::RealVectorBounds bounds(4);
+//     // The box is a 20x20 areaa
+//     // lower bounds for x and y
+//     bounds.setLow(0,-10);
+//     bounds.setLow(1,-10);
+//     // upper bounds for x and y
+//     bounds.setHigh(0,10);
+//     bounds.setHigh(1,10);
+//     // upper and lower bounds for heading
+//     bounds.setLow(2,-M_PI);
+//     bounds.setHigh(2,M_PI);
+//     // Upper and lower bounds for velocity (20 unit per second velocity)
+//     bounds.setLow(3,-20);
+//     bounds.setHigh(3,20);
+//     stateSpace->setBounds(bounds);
+
+//     // omega,acceleration
+//     auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace,2);
+//     ob::RealVectorBounds controlBounds(2);
+//     // omega max and min M_PI/4
+//     controlBounds.setLow(0,-M_PI/4);
+//     controlBounds.setHigh(0,M_PI/4);
+//     // max and min acceleration 4 units/s^2
+//     controlBounds.setLow(1,-4);
+//     controlBounds.setHigh(1,4);
+//     controlSpace->setBounds(controlBounds);
+    
+//     // Creates a state info object
+//     auto ss = std::make_shared<oc::SimpleSetup>(controlSpace);
+
+//     // Creates an ODE checker
+//     auto odeSolver = std::make_shared<oc::ODEBasicSolver<>>(ss->getSpaceInformation(), &carODE);
+
+//     // Sets State Propagator
+//     ss->getSpaceInformation()->setStatePropagator(oc::ODESolver::getStatePropagator(odeSolver));
+
+//     // Sets validity checker
+//     ss->setStateValidityChecker([&obstacles](const ob::State *state) {
+//         const auto *data = state->as<ob::RealVectorStateSpace::StateType>()->values;
+//         if (!data) return false;
+//         double x = data[0];
+//         double y = data[1];
+//         double theta = data[2];
+//         double sLength = 0.4;
+//         return isValidSquare(x, y, theta, sLength, obstacles);
+//     });
+    
+//     return ss;
+}
+
 
 // Main function: Includes robot choice, 
 int main(int /* argc */, char ** /* argv */)
@@ -509,9 +632,47 @@ int main(int /* argc */, char ** /* argv */)
             std::cin >> robotArena.length;
         }
     }
-
+    int obstacleChoice;
     // Generates Obstacles based on basic inputs
+    do
+    {
+        std::cout << "What Situation do you want the robot to fight in" << std::endl;
+        std::cout << " (1) 0 static obstacles, 1 dynamic obstacle" << std::endl;
+        std::cout << " (2) 1 static obstacle, 0 dynamic obstacles" << std::endl;
+        std::cout << " (3) 1 static obstacle, 1 dynamic obstacle" << std::endl;
+        std::cout << " (4) Custom Obstacles" << std::endl;
 
+        std::cin >> obstacleChoice;
+    } while (obstacleChoice < 1 || obstacleChoice > 4);
+    // Maximum obstacle size is determined by a housebot's size i.e. 0.3 m. max speed is 9m/s
+    Obstacles obstacles;
+    int numDynamic=0;
+    int numStatic=0;
+    if(obstacleChoice==1){
+      numDynamic = 1;
+    }
+    else{
+        if(obstacleChoice==2){
+            numStatic = 1;
+        }
+        else{
+            if(obstacleChoice==3){
+                numDynamic = 1;
+                numStatic = 1;
+            }
+            else{
+                std::cout<<"How many dynamic obstacles do you want?" << std::endl;
+                std::cin >> numDynamic;
+                std::cout<<"How many static obstacles do you want?" << std::endl;
+                std::cin >> numStatic;
+            }
+        }
+    }
+    obstacles = generateObstacles(robotArena,numStatic,numDynamic);
+
+    Opponent opponent = generateOpponent(robotArena,obstacles);
+
+    Coordinate start = generateStartingPosition(robotArena,obstacles,opponent,model);
 
 
    
