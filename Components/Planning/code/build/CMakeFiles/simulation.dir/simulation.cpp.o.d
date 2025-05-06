@@ -1514,6 +1514,8 @@ CMakeFiles/simulation.dir/simulation.cpp.o: /code/simulation.cpp \
  /usr/local/include/ompl-1.6/ompl/base/samplers/InformedStateSampler.h \
  /usr/local/include/ompl-1.6/ompl/base/goals/GoalSampleableRegion.h \
  /usr/local/include/ompl-1.6/ompl/base/goals/GoalRegion.h \
+ /usr/local/include/ompl-1.6/ompl/base/spaces/SE2StateSpace.h \
+ /usr/local/include/ompl-1.6/ompl/base/spaces/SO2StateSpace.h \
  /usr/include/c++/11/math.h /usr/include/c++/11/fstream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \

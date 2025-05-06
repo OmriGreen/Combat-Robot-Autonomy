@@ -53,7 +53,7 @@ std::vector<StaticObstacle> generateStaticObstacles(Arena arena, int numObstacle
 std::vector<DynamicObstacle> generateDynamicObstacles(Arena arena, int numObstacles, float maxRadius, float maxSpeed, float minRadius = 0.01);
 
 // Generates the Obstacles object using 2 lists of static and dynamic obstacles respectively
-Obstacles generateObstacles(Arena arena, int numStaticObstacles, int numDyamicObstacles, float maxStaticRadius, float maxDynamicRadius, float maxSpeed);
+Obstacles generateObstacles(Arena arena, int numStaticObstacles, int numDyamicObstacles, float maxRadius=0.3, float maxSpeed=9);
 
 // Updates Obstacles based on time
 Obstacles updateObstacles(Obstacles prevObstacles, Arena arena, float timeInterval=0.01);
@@ -96,5 +96,15 @@ bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotMod
 
 
 // TYING EVERYTHING TOGETHER TO FIND INVALID POSITIONS ===========================================
-bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, float x, float y, float theta);
+bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, float x, float y, float theta, Arena a);
+
+// GENERATES STARTING OPPONENT AND ROBOT POSITIONS =============================================================
+
+// Generates a opponent in a valid position in the arena
+Opponent generateOpponent(Arena a, Obstacles ob, float maxSpeed=9, float maxRadius=0.3, float minRadius=0.1);
+
+// Generates a static starting position for the robot
+Coordinate generateStartingPosition(Arena a, Obstacles ob, Opponent op, RobotModel robot);
+
+
 

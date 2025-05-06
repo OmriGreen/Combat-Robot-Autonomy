@@ -492,3 +492,90 @@ bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles,
         }
     }
 }
+
+// GENERATES STARTING OPPONENT AND ROBOT POSITIONS =============================================================
+
+// Generates a opponent in a valid position in the arena
+Opponent generateOpponent(Arena a, Obstacles ob, float maxSpeed, float maxRadius, float minRadius){
+    Coordinate c;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> distX(0, a.width);
+    std::uniform_real_distribution<float> distY(0, a.length);
+    std::uniform_real_distribution<float> distR(minRadius, maxRadius);
+    std::uniform_real_distribution<float> genTheta(0, 2*M_PI);
+    std::uniform_real_distribution<float> genVelocity(-maxSpeed, maxSpeed);
+
+    // randomly generates a position for an opponent and if valid returns it
+    bool invalid = true;
+    float x;
+    float y;
+    float theta;
+    float radius;
+    float velocity;
+
+    while(invalid){
+        // generates a randomized position and trajectory for an opponent
+        x = distX(gen);
+        y = distY(gen);
+        theta = genTheta(gen);
+        radius = distR(gen);
+        velocity = genVelocity(gen);
+
+        // Checks if the opponent's position is valid
+        c.theta = theta;
+        c.x = x;
+        c.y = y;
+        // Checks if the point is within an obstacle cannot be true initially
+        if(checkIfPointInObstacles(ob,c,radius) == false){
+            // Checks if the point is outside of the arena cannot be true initially
+            if(checkIfPointInvalidRound(a,c,radius) == false){
+                // Valid location therefore
+                invalid = false;
+            }
+        }
+
+    }
+
+    // Generates opponent
+    Opponent o;
+    o.radius = radius;
+    o.theta = theta;
+    o.velocity = velocity;
+    o.x0 = 0;
+    o.x = x;
+    o.y = y;
+    o.y0 = y;
+
+    return o;
+
+}
+
+// Generates a static starting position for the robot
+Coordinate generateStartingPosition(Arena a, Obstacles ob, Opponent op, RobotModel robot){
+    float maxSpeed = robot.robotDynamics.velocity_max;
+    Coordinate c;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> distX(0, a.width);
+    std::uniform_real_distribution<float> distY(0, a.length);
+    std::uniform_real_distribution<float> genTheta(0, 2*M_PI);
+
+    // Assumes position is invalid initially
+    bool invalid = true;
+    while(invalid){
+        // Generates a position
+        c.x = distX(gen);
+        c.y = distY(gen);
+        c.theta = genTheta(gen);
+
+        // Checks if the position is valid
+        if(checkIfRobotValid(robot,op,ob,c.x,c.y,c.theta, a)){
+            invalid = false;
+        }
+    }
+
+    return c;
+
+
+}

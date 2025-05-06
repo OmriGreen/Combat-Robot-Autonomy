@@ -446,7 +446,7 @@ RobotModel calcProperties(std::string filePath){
 
 ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Opponent op, Arena a)
 {
-    // robotSpace (x,y,theta),(vx,vy,omega),(ax,ay,alpha), (omega_weapon, alpha_weapon) =======================================
+    // stateSpace (x,y,theta),(vx,vy,omega),(ax,ay,alpha), (omega_weapon, alpha_weapon) =======================================
     auto stateSpace = std::make_shared<ompl::base::CompoundStateSpace>();  
     // Making subspaces --------------------------------------------
     // cartesian subspace (x,y,theta) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -507,39 +507,34 @@ ompl::control::SimpleSetupPtr createRobot(RobotModel model, Obstacles ob, Oppone
     stateSpace->addSubspace(acceleration,1.0);
     stateSpace->addSubspace(weapon,1.0);
 
+    // Control Space (leftDrive,rightDrive,weaponDrive) ======================================================================
+    auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace,3);
+    ob::RealVectorBounds controlBounds(3);
+    // left drive [-1,1]
+    controlBounds.setLow(0,-1);
+    controlBounds.setHigh(0,1);
+    // right drive [-1,1]
+    controlBounds.setLow(1,-1);
+    controlBounds.setHigh(1,1);
+    // weapon drive [-1,1] or [0,1]
+    if(abs(model.robotDynamics.alpha_weapon_max) == abs(model.robotDynamics.alpha_weapon_min)){
+        controlBounds.setLow(2,-1);
+        controlBounds.setHigh(2,1);
+    }
+    else{
+        controlBounds.setLow(2,0);
+        controlBounds.setHigh(2,1);
+    }
+
+    controlSpace->setBounds(controlBounds);
+
+    // Creating a state info object
+    auto si = std::make_shared<oc::SimpleSetup>(controlSpace);
    
     
 
-//     // TODO: Create and setup the car's state space, control space, validity checker, everything you need for planning.
-//     // (x,y,theta,v)
-//     auto stateSpace = std::make_shared<ob::RealVectorStateSpace>(4);
-//     ob::RealVectorBounds bounds(4);
-//     // The box is a 20x20 areaa
-//     // lower bounds for x and y
-//     bounds.setLow(0,-10);
-//     bounds.setLow(1,-10);
-//     // upper bounds for x and y
-//     bounds.setHigh(0,10);
-//     bounds.setHigh(1,10);
-//     // upper and lower bounds for heading
-//     bounds.setLow(2,-M_PI);
-//     bounds.setHigh(2,M_PI);
-//     // Upper and lower bounds for velocity (20 unit per second velocity)
-//     bounds.setLow(3,-20);
-//     bounds.setHigh(3,20);
-//     stateSpace->setBounds(bounds);
 
-//     // omega,acceleration
-//     auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace,2);
-//     ob::RealVectorBounds controlBounds(2);
-//     // omega max and min M_PI/4
-//     controlBounds.setLow(0,-M_PI/4);
-//     controlBounds.setHigh(0,M_PI/4);
-//     // max and min acceleration 4 units/s^2
-//     controlBounds.setLow(1,-4);
-//     controlBounds.setHigh(1,4);
-//     controlSpace->setBounds(controlBounds);
-    
+
 //     // Creates a state info object
 //     auto ss = std::make_shared<oc::SimpleSetup>(controlSpace);
 
