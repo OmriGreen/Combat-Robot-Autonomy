@@ -1,94 +1,125 @@
 #include "CollisionChecking.h"
+#include <iostream>    // Added for std::cout and std::cerr
+#include <ostream>     // Added for std::endl
 
-// Generates a list of static obstacles
-std::vector<StaticObstacle> generateStaticObstacles(Arena arena, int numObstacles ,float maxRadius, float minRadius){
+// Generates a list of static obstacles with safe zone protection
+std::vector<StaticObstacle> generateStaticObstacles(Arena arena, int numObstacles, double maxRadius, double minRadius, double safeZoneX, double safeZoneY, double safeZoneRadius){
     std::vector<StaticObstacle> obstacles;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(maxRadius, arena.width - maxRadius);
-    std::uniform_real_distribution<float> distY(maxRadius, arena.length - maxRadius);
-    std::uniform_real_distribution<float> distR(minRadius, maxRadius);
+    std::uniform_real_distribution<double> distX(maxRadius, arena.width - maxRadius);
+    std::uniform_real_distribution<double> distY(maxRadius, arena.length - maxRadius);
+    std::uniform_real_distribution<double> distR(minRadius, maxRadius);
 
-    for (int i = 0; i < numObstacles; i++) {
+    // Use arena center if safeZone not specified
+    if(safeZoneX < 0 || safeZoneY < 0){
+        safeZoneX = arena.width/2.0;
+        safeZoneY = arena.length/2.0;
+    }
+
+    int attempts = 0;
+    while(obstacles.size() < static_cast<size_t>(numObstacles) && attempts < numObstacles*10){
+        attempts++;
         StaticObstacle o;
+        o.radius = distR(gen);
         o.x = distX(gen);
         o.y = distY(gen);
-        o.radius = distR(gen);
-        obstacles.push_back(o);
+
+        double dx = o.x - safeZoneX;
+        double dy = o.y - safeZoneY;
+        double dist = std::sqrt(dx*dx + dy*dy);
+
+        if(dist >= (safeZoneRadius + o.radius)){
+            obstacles.push_back(o);
+        }
     }
     return obstacles;
 }
 
-// Generates a list of dynamic obstacles
-std::vector<DynamicObstacle> generateDynamicObstacles(Arena arena, int numObstacles, float maxRadius, float maxSpeed, float minRadius){
+// Generates a list of dynamic obstacles with safe zone protection
+std::vector<DynamicObstacle> generateDynamicObstacles(Arena arena, int numObstacles, double maxRadius, double maxSpeed, double minRadius, double safeZoneX, double safeZoneY, double safeZoneRadius){
     std::vector<DynamicObstacle> obstacles;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0, arena.width);
-    std::uniform_real_distribution<float> distY(0, arena.length);
-    std::uniform_real_distribution<float> distR(minRadius, maxRadius);
-    std::uniform_real_distribution<float> theta(0, 2*M_PI);
-    std::uniform_real_distribution<float> velocity(-maxSpeed, maxSpeed);
+    std::uniform_real_distribution<double> distX(0, arena.width);
+    std::uniform_real_distribution<double> distY(0, arena.length);
+    std::uniform_real_distribution<double> distR(minRadius, maxRadius);
+    std::uniform_real_distribution<double> theta(0, 2*M_PI);
+    std::uniform_real_distribution<double> velocity(-maxSpeed, maxSpeed);
 
-    for (int i = 0; i < numObstacles; i++) {
+    // Use arena center if safeZone not specified
+    if(safeZoneX < 0 || safeZoneY < 0){
+        safeZoneX = arena.width/2.0;
+        safeZoneY = arena.length/2.0;
+    }
+
+    int attempts = 0;
+    while(obstacles.size() < static_cast<size_t>(numObstacles) && attempts < numObstacles*10){
+        attempts++;
         DynamicObstacle o;
         o.x = distX(gen);
         o.y = distY(gen);
         o.x0 = o.x;
         o.y0 = o.y;
-        o.theta = theta(gen);
         o.radius = distR(gen);
+        o.theta = theta(gen);
         o.velocity = velocity(gen);
-        obstacles.push_back(o);
+
+        double dx = o.x - safeZoneX;
+        double dy = o.y - safeZoneY;
+        double dist = std::sqrt(dx*dx + dy*dy);
+
+        if(dist >= (safeZoneRadius + o.radius)){
+            obstacles.push_back(o);
+        }
     }
     return obstacles;
-
 }
 
-// Utilizes the generateDynamicObstacles and generateStaticObstacles objects to generate obstacles for the robot based on variables
-Obstacles generateObstacles(Arena arena, int numStaticObstacles, int numDyamicObstacles, float maxRadius, float maxSpeed){
+// Generates obstacles by calling the dynamic and static generators with safe zone params
+Obstacles generateObstacles(Arena arena, int numStaticObstacles, int numDyamicObstacles, double maxRadius, double maxSpeed, double safeZoneX, double safeZoneY, double safeZoneRadius){
     Obstacles obstacles;
-    obstacles.dynamicObstacles = generateDynamicObstacles(arena, numDyamicObstacles, maxRadius, maxSpeed);
-    obstacles.staticObstacles = generateStaticObstacles(arena,numStaticObstacles, maxRadius);
+    obstacles.dynamicObstacles = generateDynamicObstacles(arena, numDyamicObstacles, maxRadius, maxSpeed, 0.01, safeZoneX, safeZoneY, safeZoneRadius);
+    obstacles.staticObstacles = generateStaticObstacles(arena, numStaticObstacles, maxRadius, 0.001, safeZoneX, safeZoneY, safeZoneRadius);
     return obstacles;
 }
 
 // Updates obstacles over time
-Obstacles updateObstacles(Obstacles obstacles, Arena arena, float timeInterval){
+Obstacles updateObstacles(Obstacles obstacles, Arena arena, double timeInterval){
     for (auto& o : obstacles.dynamicObstacles) {
-        float dx = o.velocity * std::cos(o.theta) * timeInterval;
-        float dy = o.velocity * std::sin(o.theta) * timeInterval;
+        double dx = o.velocity * std::cos(o.theta) * timeInterval;
+        double dy = o.velocity * std::sin(o.theta) * timeInterval;
 
-        float nextX = o.x + dx;
-        float nextY = o.y + dy;
+        double nextX = o.x + dx;
+        double nextY = o.y + dy;
 
-        float scale = 1.0; // scaling factor for motion if the robot hit a wall
+        double scale = 1.0; // scaling factor for motion if the robot hit a wall
 
         // Check right wall
         if (nextX + o.radius > arena.width) {
-            float maxDist = (arena.width - o.radius) - o.x;
-            float proposedDist = dx;
+            double maxDist = (arena.width - o.radius) - o.x;
+            double proposedDist = dx;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check left wall
         if (nextX - o.radius < 0.0) {
-            float maxDist = (0.0 + o.radius) - o.x;
-            float proposedDist = dx;
+            double maxDist = (0.0 + o.radius) - o.x;
+            double proposedDist = dx;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check top wall
         if (nextY + o.radius > arena.length) {
-            float maxDist = (arena.length - o.radius) - o.y;
-            float proposedDist = dy;
+            double maxDist = (arena.length - o.radius) - o.y;
+            double proposedDist = dy;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check bottom wall
         if (nextY - o.radius < 0.0) {
-            float maxDist = (0.0 + o.radius) - o.y;
-            float proposedDist = dy;
+            double maxDist = (0.0 + o.radius) - o.y;
+            double proposedDist = dy;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
@@ -109,40 +140,40 @@ Obstacles updateObstacles(Obstacles obstacles, Arena arena, float timeInterval){
 }
 
 // Updates opponent over time
-Opponent updateOpponent(Opponent o, Arena arena, float timeInterval){
-    float dx = o.velocity * std::cos(o.theta) * timeInterval;
-        float dy = o.velocity * std::sin(o.theta) * timeInterval;
+Opponent updateOpponent(Opponent o, Arena arena, double timeInterval){
+    double dx = o.velocity * std::cos(o.theta) * timeInterval;
+        double dy = o.velocity * std::sin(o.theta) * timeInterval;
 
-        float nextX = o.x + dx;
-        float nextY = o.y + dy;
+        double nextX = o.x + dx;
+        double nextY = o.y + dy;
 
-        float scale = 1.0; // scaling factor for motion if the robot hit a wall
+        double scale = 1.0; // scaling factor for motion if the robot hit a wall
 
         // Check right wall
         if (nextX + o.radius > arena.width) {
-            float maxDist = (arena.width - o.radius) - o.x;
-            float proposedDist = dx;
+            double maxDist = (arena.width - o.radius) - o.x;
+            double proposedDist = dx;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check left wall
         if (nextX - o.radius < 0.0) {
-            float maxDist = (0.0 + o.radius) - o.x;
-            float proposedDist = dx;
+            double maxDist = (0.0 + o.radius) - o.x;
+            double proposedDist = dx;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check top wall
         if (nextY + o.radius > arena.length) {
-            float maxDist = (arena.length - o.radius) - o.y;
-            float proposedDist = dy;
+            double maxDist = (arena.length - o.radius) - o.y;
+            double proposedDist = dy;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
         // Check bottom wall
         if (nextY - o.radius < 0.0) {
-            float maxDist = (0.0 + o.radius) - o.y;
-            float proposedDist = dy;
+            double maxDist = (0.0 + o.radius) - o.y;
+            double proposedDist = dy;
             if (proposedDist != 0.0) scale = std::min(scale, maxDist / proposedDist);
         }
 
@@ -185,7 +216,7 @@ bool checkIfPointInvalidSquare(Arena a, Coordinate c){
 }
 
 // Checks if a point on a round weapon or robot is not within a arena (True is in a invalid location)
-bool checkIfPointInvalidRound(Arena a, Coordinate c, float radius){
+bool checkIfPointInvalidRound(Arena a, Coordinate c, double radius){
      // If the point is outside of the arena return true
      if(a.length <= c.y + radius){
         return true;
@@ -204,11 +235,11 @@ bool checkIfPointInvalidRound(Arena a, Coordinate c, float radius){
 }
 
 // Gets all the corners of of a square 
-std::vector<Coordinate> getCorners(Coordinate c, float width, float height, float x_w, float y_w) {
+std::vector<Coordinate> getCorners(Coordinate c, double width, double height, double x_w, double y_w) {
     std::vector<Coordinate> corners;
 
-    float w = width / 2.0;
-    float h = height / 2.0;
+    double w = width / 2.0;
+    double h = height / 2.0;
 
     // Define corners in local space (relative to center)
     std::vector<Coordinate> local = {
@@ -218,8 +249,8 @@ std::vector<Coordinate> getCorners(Coordinate c, float width, float height, floa
         {-w + x_w,  h + y_w}  
     };
 
-    float cos_theta = std::cos(c.theta);
-    float sin_theta = std::sin(c.theta);
+    double cos_theta = std::cos(c.theta);
+    double sin_theta = std::sin(c.theta);
 
     // Rotate and translate each corner to world coordinates
     for (const auto& p : local) {
@@ -233,7 +264,7 @@ std::vector<Coordinate> getCorners(Coordinate c, float width, float height, floa
 }
 
 // Returns true if the position is invalid, true otherwise
-bool checkPositionInvalid(RobotModel robot, Arena a, float x, float y, float theta){
+bool checkPositionInvalid(RobotModel robot, Arena a, double x, double y, double theta){
     geometry r = robot.robotGeometry;
     Coordinate c;
     c.x = x;
@@ -291,8 +322,8 @@ bool checkPositionInvalid(RobotModel robot, Arena a, float x, float y, float the
 
 // CHECK COLLISIONS WITH OBSTACLES ==================================================
 // Checks if a point is in a obstacle, returns true in an invalid location
-bool checkIfPointInObstacles(Obstacles ob, Coordinate c, float r){
-    float dist;
+bool checkIfPointInObstacles(Obstacles ob, Coordinate c, double r){
+    double dist;
     // Checks Dynamic obstacles
     for (auto& o : ob.dynamicObstacles) {
         // Distance betweem edges of the obstacle and the robot or weapoin
@@ -318,7 +349,7 @@ bool checkIfPointInObstacles(Obstacles ob, Coordinate c, float r){
 }
 
 // Checks if the robot or weapon hit an obstacle
-bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotModel robot){
+bool checkIfRobotHitObstacle(Obstacles ob, double x, double y, double theta, RobotModel robot){
     geometry r = robot.robotGeometry;
     Coordinate c;
     c.x = x;
@@ -337,7 +368,7 @@ bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotM
         std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, 0, 0);
         // Checks if every vertice is inside of the arena and if not returns false
         for(int i = 0; i <4; i++){
-            if(checkIfPointInObstacles(ob,vertices[i],0)){
+            if(checkIfPointInObstacles(ob,vertices[i],0.0)){
                 return true;
             }
         }
@@ -356,7 +387,7 @@ bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotM
         std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, r.weapon_x, r.weapon_y);
         // Checks if any vertice hit an obstacle and if so returns true
         for(int i = 0; i <4; i++){
-            if(checkIfPointInObstacles(ob,vertices[i],0)){
+            if(checkIfPointInObstacles(ob,vertices[i],0.0)){
                 return true;
             }
         }
@@ -378,8 +409,8 @@ bool checkIfRobotHitObstacle(Obstacles ob, float x, float y, float theta, RobotM
 
 // CHECK COLLISIONS WITH OPPONENT ===================================================
 // Checks if a point in the robot hit an opponent
-bool checkIfPointInOpponent(Opponent o, Coordinate c, float r){
-    float dist;
+bool checkIfPointInOpponent(Opponent o, Coordinate c, double r){
+    double dist;
     // Distance betweem edges of the obstacle and the robot or weapoin
     dist = sqrt((o.x-c.x)*(o.x-c.x)-(o.y-c.y)*(o.y-c.y))-o.radius-r;
 
@@ -392,7 +423,7 @@ bool checkIfPointInOpponent(Opponent o, Coordinate c, float r){
 }
 
 // Checks if the robot's main body hit an opponent (NOT GOAL SHOULD BE AVOIDED)
-bool checkIfBodyInOpponent(Opponent o, float x, float y, float theta, RobotModel robot){
+bool checkIfBodyInOpponent(Opponent o, double x, double y, double theta, RobotModel robot){
     geometry r = robot.robotGeometry;
     Coordinate c;
     c.x = x;
@@ -411,7 +442,7 @@ bool checkIfBodyInOpponent(Opponent o, float x, float y, float theta, RobotModel
         std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, 0, 0);
         // Checks if every vertice is inside of the arena and if not returns false
         for(int i = 0; i <4; i++){
-            if(checkIfPointInOpponent(o,vertices[i],0)){
+            if(checkIfPointInOpponent(o,vertices[i],0.0)){
                 return true;
             }
         }
@@ -428,7 +459,7 @@ bool checkIfBodyInOpponent(Opponent o, float x, float y, float theta, RobotModel
 }
 
 // Checks if the robot's weapon impacted the opponent (VICTORY CONDITION)
-bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotModel robot){
+bool checkIfWeaponInOpponent(Opponent o, double x, double y, double theta, RobotModel robot){
     geometry r = robot.robotGeometry;
     Coordinate c;
     c.x = x;
@@ -447,7 +478,7 @@ bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotMod
         std::vector<Coordinate> vertices = getCorners(c, r.robot_width, r.robot_height, r.weapon_x, r.weapon_y);
         // Checks if any vertice hit an obstacle and if so returns true
         for(int i = 0; i <4; i++){
-            if(checkIfPointInOpponent(o,vertices[i],0)){
+            if(checkIfPointInOpponent(o,vertices[i],0.0)){
                 return true;
             }
         }
@@ -467,24 +498,22 @@ bool checkIfWeaponInOpponent(Opponent o, float x, float y, float theta, RobotMod
 }
 
 // FINAL COLLISION DETECTION CODE ================================
-bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, float x, float y, float theta, Arena arena){
-    // Checks if the robot is not within the arena and if so the robot is in a invalid position
-    if(checkPositionInvalid(robot,arena,x,y,theta)){
+bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles, double x, double y, double theta, Arena arena){
+    // Checks if the robot is not within the arena and if so the robot is in an invalid position
+    if(checkPositionInvalid(robot, arena, x, y, theta)){
         return false;
     }
-
-    // Checks if the robot hit a obstacle and if so the robot is in an invalid position
+    // Checks if the robot hit an obstacle and if so the robot is in an invalid position
     if(checkIfRobotHitObstacle(obstacles, x, y, theta, robot)){
         return false;
     }
-
-    // If a robot's weapon hit an opponent and its body hit the opponent the position is ALWAYS valid (Opponent WILL be knowcked back)
-    if(checkIfWeaponInOpponent(opponent,x,y,theta,robot)){
+    // If a robot's weapon hit an opponent then the position is ALWAYS valid (Opponent WILL be knocked back)
+    if(checkIfWeaponInOpponent(opponent, x, y, theta, robot)){
         return true;
     }
     else{
-        // If a robot's weapon DID NOT hit an opponent and it has hit the opponent the position is NOT valid (Likely means hit by the opponent)
-        if(checkIfBodyInOpponent(opponent,x,y,theta,robot)){
+        // If the robot's weapon DID NOT hit opponent but its body hit the opponent then the position is NOT valid
+        if(checkIfBodyInOpponent(opponent, x, y, theta, robot)){
             return false;
         }
         else{
@@ -496,23 +525,29 @@ bool checkIfRobotValid(RobotModel robot, Opponent opponent, Obstacles obstacles,
 // GENERATES STARTING OPPONENT AND ROBOT POSITIONS =============================================================
 
 // Generates a opponent in a valid position in the arena
-Opponent generateOpponent(Arena a, Obstacles ob, float maxSpeed, float maxRadius, float minRadius){
+Opponent generateOpponent(Arena a, Obstacles ob, double maxSpeed, double maxRadius, double minRadius){
     Coordinate c;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0, a.width);
-    std::uniform_real_distribution<float> distY(0, a.length);
-    std::uniform_real_distribution<float> distR(minRadius, maxRadius);
-    std::uniform_real_distribution<float> genTheta(0, 2*M_PI);
-    std::uniform_real_distribution<float> genVelocity(-maxSpeed, maxSpeed);
+    std::uniform_real_distribution<double> distX(0, a.width);
+    std::uniform_real_distribution<double> distY(0, a.length);
+    std::uniform_real_distribution<double> distR(minRadius, maxRadius);
+    std::uniform_real_distribution<double> genTheta(0, 2*M_PI);
+    std::uniform_real_distribution<double> genVelocity(-maxSpeed, maxSpeed);
 
     // randomly generates a position for an opponent and if valid returns it
     bool invalid = true;
-    float x;
-    float y;
-    float theta;
-    float radius;
-    float velocity;
+    double x;
+    double y;
+    double theta;
+    double radius;
+    double velocity;
+
+    // To avoid overlap with start, optionally pass a forbidden region (center, radius)
+    // For now, just avoid the arena center (used by start by default)
+    double forbidden_x = a.width / 2.0;
+    double forbidden_y = a.length / 2.0;
+    double forbidden_radius = 0.5; // minimum separation
 
     while(invalid){
         // generates a randomized position and trajectory for an opponent
@@ -530,11 +565,15 @@ Opponent generateOpponent(Arena a, Obstacles ob, float maxSpeed, float maxRadius
         if(checkIfPointInObstacles(ob,c,radius) == false){
             // Checks if the point is outside of the arena cannot be true initially
             if(checkIfPointInvalidRound(a,c,radius) == false){
-                // Valid location therefore
-                invalid = false;
+                // Ensure not too close to forbidden region (start)
+                double dx = x - forbidden_x;
+                double dy = y - forbidden_y;
+                double dist = std::sqrt(dx*dx + dy*dy);
+                if(dist > forbidden_radius + radius) {
+                    invalid = false;
+                }
             }
         }
-
     }
 
     // Generates opponent
@@ -542,40 +581,49 @@ Opponent generateOpponent(Arena a, Obstacles ob, float maxSpeed, float maxRadius
     o.radius = radius;
     o.theta = theta;
     o.velocity = velocity;
-    o.x0 = 0;
+    o.x0 = x;
     o.x = x;
     o.y = y;
     o.y0 = y;
 
     return o;
-
 }
 
 // Generates a static starting position for the robot
 Coordinate generateStartingPosition(Arena a, Obstacles ob, Opponent op, RobotModel robot){
-    float maxSpeed = robot.robotDynamics.velocity_max;
     Coordinate c;
+    // Try using the arena center with zero orientation as initial state
+    c.x = a.width / 2.0;
+    c.y = a.length / 2.0;
+    c.theta = 0.0;
+    // Ensure start is not at the opponent's position
+    if ((std::abs(c.x - op.x) > 1e-3 || std::abs(c.y - op.y) > 1e-3) &&
+        checkIfRobotValid(robot, op, ob, c.x, c.y, c.theta, a)) {
+        std::cout << "Using center of arena as start state." << std::endl;
+        return c;
+    }
+    // Fallback to random sampling if the center is invalid or coincides with opponent
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0, a.width);
-    std::uniform_real_distribution<float> distY(0, a.length);
-    std::uniform_real_distribution<float> genTheta(0, 2*M_PI);
-
-    // Assumes position is invalid initially
+    std::uniform_real_distribution<double> distX(0, a.width);
+    std::uniform_real_distribution<double> distY(0, a.length);
+    std::uniform_real_distribution<double> genTheta(0, 2*M_PI);
     bool invalid = true;
+    int attempts = 0;
     while(invalid){
-        // Generates a position
         c.x = distX(gen);
         c.y = distY(gen);
         c.theta = genTheta(gen);
-
-        // Checks if the position is valid
-        if(checkIfRobotValid(robot,op,ob,c.x,c.y,c.theta, a)){
+        // Ensure start is not at the opponent's position
+        if ((std::abs(c.x - op.x) > 1e-3 || std::abs(c.y - op.y) > 1e-3) &&
+            checkIfRobotValid(robot, op, ob, c.x, c.y, c.theta, a)) {
             invalid = false;
         }
+        attempts++;
+        if (attempts > 10000) {
+            std::cerr << "Fallback sampling exceeded attempts. Approximate solution found but exact solution required. Returning last candidate. Consider increasing solve time or adjusting problem setup." << std::endl;
+            break;
+        }
     }
-
     return c;
-
-
 }

@@ -1,0 +1,255 @@
+OMPL version 1.6.0
+Experiment CombatRobotBenchmark
+0 experiment properties
+Running on 42270a8c1377
+Starting at 2025-05-07 04:42:57
+<<<|
+Properties of the state space 'CompoundSpace0'
+  - signature: 10 0 6 4 3 1 2 2 1 1 3 
+  - dimension: 6
+  - extent: 1749.87
+  - sanity checks for state space passed
+  - probability of valid states: 0.755
+  - average length of a valid motion: 353.664
+  - average number of samples drawn per second: sampleUniform()=1.04938e+07 sampleUniformNear()=7.51332e+06 sampleGaussian()=4.01123e+06
+Settings for the state space 'CompoundSpace0'
+  - state validity check resolution: 1%
+  - valid segment count factor: 1
+  - state space:
+Compound state space 'CompoundSpace0' of dimension 6 [
+Compound state space 'SE2CompoundSpace1' of dimension 3 (locked) [
+Real vector state space 'RealVectorSpace2' of dimension 2 with bounds: 
+  - min: 0 0 
+  - max: 2.438 2.438 
+ of weight 1
+SO2 state space 'SO2Space3'
+ of weight 0.5
+]
+Registered projections:
+  - <default>
+Projection of dimension 2
+Cell sizes (computed defaults): [0.1219 0.1219]
+ of weight 1
+Real vector state space 'RealVectorSpace4' of dimension 3 with bounds: 
+  - min: -5.4249 -66.1573 0 
+  - max: 5.4249 66.3772 3487.17 
+ of weight 0.5
+]
+Registered projections:
+  - <default>
+Projection of dimension 6
+Cell sizes (inferred by sampling): [0.0547474 0.0538258 0.108636 0.109398 0.108247 0.0544792]
+
+Declared parameters:
+longest_valid_segment_fraction = 0.01
+max_control_duration = 10
+min_control_duration = 1
+projection.cellsize.0 = 0.0547474
+projection.cellsize.1 = 0.0538258
+projection.cellsize.2 = 0.108636
+projection.cellsize.3 = 0.109398
+projection.cellsize.4 = 0.108247
+projection.cellsize.5 = 0.0544792
+projection.cellsize_factor = 0
+propagation_step_size = 0.01
+valid_segment_count_factor = 1
+Valid state sampler named uniform with parameters:
+nr_attempts = 100
+  - control space:
+Real vector control space 'RealVectorControl[CompoundSpace0]' with bounds: 
+  - min: -1 -1 0 
+  - max: 1 1 1 
+  - can propagate backward: yes
+  - propagation step size: 0.01
+  - propagation duration: [1, 10]
+Start states:
+Compound state [
+Compound state [
+RealVectorState [1.219 1.219]
+SO2State [0]
+]
+RealVectorState [0 0 0]
+]
+Goal state, threshold = 2.22045e-16, memory address = 0x55ca0f639db0, state = 
+Compound state [
+Compound state [
+RealVectorState [0.976275 2.31469]
+SO2State [0]
+]
+RealVectorState [0 0 0]
+]
+OptimizationObjective = nullptr
+There are 0 solutions
+
+Properties of benchmarked planners:
+Planner RG_RRT specs:
+Multithreaded:                 No
+Reports approximate solutions: Yes
+Can optimize solutions:        No
+Aware of the following parameters: goal_bias intermediate_states
+Planner RRT specs:
+Multithreaded:                 No
+Reports approximate solutions: Yes
+Can optimize solutions:        No
+Aware of the following parameters: goal_bias intermediate_states
+Planner KPIECE1 specs:
+Multithreaded:                 No
+Reports approximate solutions: Yes
+Can optimize solutions:        No
+Aware of the following parameters: bad_score_factor border_fraction goal_bias good_score_factor max_close_samples
+|>>>
+<<<|
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        48 bits physical, 48 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               16
+On-line CPU(s) list:                  0-15
+Vendor ID:                            AuthenticAMD
+Model name:                           AMD Ryzen 7 7730U with Radeon Graphics
+CPU family:                           25
+Model:                                80
+Thread(s) per core:                   1
+Core(s) per socket:                   16
+Socket(s):                            1
+Stepping:                             0
+BogoMIPS:                             3992.29
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold v_vmsave_vmload vgif umip pku vaes vpclmulqdq rdpid fsrm arch_capabilities
+Virtualization:                       AMD-V
+Hypervisor vendor:                    KVM
+Virtualization type:                  full
+L1d cache:                            1 MiB (16 instances)
+L1i cache:                            1 MiB (16 instances)
+L2 cache:                             8 MiB (16 instances)
+L3 cache:                             256 MiB (16 instances)
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Not affected
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Not affected
+Vulnerability Spec rstack overflow:   Vulnerable: Safe RET, no microcode
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+|>>>
+10969965013864871 is the random seed
+30 seconds per run
+1024 MB per run
+3 runs per planner
+106.675 seconds spent to collect the data
+1 enum type
+status|Unknown status|Invalid start|Invalid goal|Unrecognized goal type|Timeout|Approximate solution|Exact solution|Crash|Unknown status|Unknown status
+3 planners
+control_RG_RRT
+14 common properties
+goal_bias = 0.05
+intermediate_states = 0
+longest_valid_segment_fraction = 0.01
+max_control_duration = 10
+min_control_duration = 1
+projection.cellsize.0 = 0.0547474
+projection.cellsize.1 = 0.0538258
+projection.cellsize.2 = 0.108636
+projection.cellsize.3 = 0.109398
+projection.cellsize.4 = 0.108247
+projection.cellsize.5 = 0.0544792
+projection.cellsize_factor = 0
+propagation_step_size = 0.01
+valid_segment_count_factor = 1
+13 properties for each run
+approximate solution BOOLEAN
+correct solution BOOLEAN
+graph motions INTEGER
+graph states INTEGER
+memory REAL
+solution clearance REAL
+solution difference REAL
+solution length REAL
+solution segments INTEGER
+solved BOOLEAN
+status ENUM
+time REAL
+valid segment fraction REAL
+3 runs
+1; 1; 5000; 5001; 11.8633; 0; 1.12225; 0; 1; 0; 5; 2.32026; 0; 
+1; 0; 5000; 5001; 13.2461; 0; 1.12225; 0; 5; 0; 5; 3.22198; 0; 
+0; 1; 165; 166; 13.9961; 0; 0; 0; 2; 1; 6; 0.0239063; 0; 
+.
+control_RRT
+14 common properties
+goal_bias = 0.05
+intermediate_states = 0
+longest_valid_segment_fraction = 0.01
+max_control_duration = 10
+min_control_duration = 1
+projection.cellsize.0 = 0.0547474
+projection.cellsize.1 = 0.0538258
+projection.cellsize.2 = 0.108636
+projection.cellsize.3 = 0.109398
+projection.cellsize.4 = 0.108247
+projection.cellsize.5 = 0.0544792
+projection.cellsize_factor = 0
+propagation_step_size = 0.01
+valid_segment_count_factor = 1
+13 properties for each run
+approximate solution BOOLEAN
+correct solution BOOLEAN
+graph motions INTEGER
+graph states INTEGER
+memory REAL
+solution clearance REAL
+solution difference REAL
+solution length REAL
+solution segments INTEGER
+solved BOOLEAN
+status ENUM
+time REAL
+valid segment fraction REAL
+3 runs
+1; 1; 579119; 579120; 251.246; 0; 1.82037; 0.02; 1; 0; 5; 30.2011; 0; 
+1; 1; 579414; 579415; 385.129; 0; 2.09635; 0.01; 1; 0; 5; 30.0026; 0; 
+1; 1; 583646; 583647; 410.363; 0; 2.69269; 0.06; 1; 0; 5; 30.202; 0; 
+.
+control_KPIECE1
+17 common properties
+bad_score_factor = 0.45
+border_fraction = 0.8
+goal_bias = 0.05
+good_score_factor = 0.9
+longest_valid_segment_fraction = 0.01
+max_close_samples = 30
+max_control_duration = 10
+min_control_duration = 1
+projection.cellsize.0 = 0.0547474
+projection.cellsize.1 = 0.0538258
+projection.cellsize.2 = 0.108636
+projection.cellsize.3 = 0.109398
+projection.cellsize.4 = 0.108247
+projection.cellsize.5 = 0.0544792
+projection.cellsize_factor = 0
+propagation_step_size = 0.01
+valid_segment_count_factor = 1
+13 properties for each run
+approximate solution BOOLEAN
+correct solution BOOLEAN
+graph motions INTEGER
+graph states INTEGER
+memory REAL
+solution clearance REAL
+solution difference REAL
+solution length REAL
+solution segments INTEGER
+solved BOOLEAN
+status ENUM
+time REAL
+valid segment fraction REAL
+3 runs
+0; 1; 7541; 7542; 413.363; 0; 0; 0.1; 10; 1; 6; 0.228001; 0; 
+0; 1; 4418; 4419; 413.363; 0; 0; 0.04; 4; 1; 6; 0.117792; 0; 
+0; 1; 1599; 1600; 413.363; 0; 0; 0.06; 6; 1; 6; 0.0416327; 0; 
+.

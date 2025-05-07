@@ -153,6 +153,30 @@ CollisionChecking.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/CollisionChecking.cpp.s
 .PHONY : CollisionChecking.cpp.s
 
+RG-RRT.o: RG-RRT.cpp.o
+.PHONY : RG-RRT.o
+
+# target to build an object file
+RG-RRT.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/RG-RRT.cpp.o
+.PHONY : RG-RRT.cpp.o
+
+RG-RRT.i: RG-RRT.cpp.i
+.PHONY : RG-RRT.i
+
+# target to preprocess a source file
+RG-RRT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/RG-RRT.cpp.i
+.PHONY : RG-RRT.cpp.i
+
+RG-RRT.s: RG-RRT.cpp.s
+.PHONY : RG-RRT.s
+
+# target to generate assembly for a file
+RG-RRT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/RG-RRT.cpp.s
+.PHONY : RG-RRT.cpp.s
+
 dynamics.o: dynamics.cpp.o
 .PHONY : dynamics.o
 
@@ -213,6 +237,9 @@ help:
 	@echo "... CollisionChecking.o"
 	@echo "... CollisionChecking.i"
 	@echo "... CollisionChecking.s"
+	@echo "... RG-RRT.o"
+	@echo "... RG-RRT.i"
+	@echo "... RG-RRT.s"
 	@echo "... dynamics.o"
 	@echo "... dynamics.i"
 	@echo "... dynamics.s"

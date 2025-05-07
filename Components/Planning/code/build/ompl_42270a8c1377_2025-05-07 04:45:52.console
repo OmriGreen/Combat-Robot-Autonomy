@@ -1,0 +1,110 @@
+Info:    Beginning benchmark
+Info:    No planner specified. Using default.
+Info:    KPIECE1: Attempting to use default projection.
+Info:    Preparing for run 0 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 218, Iterations: 217
+Info:    Preparing for run 1 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 419, Iterations: 418
+Info:    Preparing for run 2 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 3 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 4 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 5 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 6 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 132, Iterations: 131
+Info:    Preparing for run 7 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 8 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 2248, Iterations: 2247
+Info:    Preparing for run 9 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 10 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 11 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 12 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 490, Iterations: 489
+Info:    Preparing for run 13 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 14 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 420, Iterations: 419
+Info:    Preparing for run 15 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 16 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 1159, Iterations: 1158
+Info:    Preparing for run 17 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 18 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 19 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 0 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 563085 states
+Info:    Preparing for run 1 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 524351 states
+Info:    Preparing for run 2 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 572570 states
+Info:    Preparing for run 3 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 558254 states
+Info:    Preparing for run 4 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 515560 states
+Info:    Preparing for run 5 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 461349 states
+Info:    Preparing for run 6 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 523992 states
+Info:    Preparing for run 7 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure
+Info:    ProblemDefinition: Adding approximate solution from planner RRT
+Info:    RRT: Created 549716 states
+Info:    Preparing for run 8 of control_RRT
+Info:    RRT: Starting planning with 1 states already in datastructure

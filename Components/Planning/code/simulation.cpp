@@ -8,8 +8,9 @@
 #include <ompl/base/spaces/SE2StateSpace.h>
 #include <ompl/base/ScopedState.h>
 #include <ompl/base/SpaceInformation.h>
-
-
+#include <ompl/control/planners/rrt/RRT.h>
+#include <ompl/control/planners/kpiece/KPIECE1.h>
+#include <ompl/control/SimpleSetup.h>
 
 // MISC Imprts
 #include <math.h>
@@ -18,13 +19,19 @@
 #include <random>
 #include <iostream>
 #include <filesystem>
+#if __cplusplus < 201703L
+#include <experimental/filesystem>
+namespace std {
+    namespace filesystem = experimental::filesystem;
+}
+#endif
 #include <limits.h>
 #include <sstream>
 #include <vector>
 
-
 // Custom Imports
 #include "CollisionChecking.h"
+#include "RG-RRT.h"
 
 namespace ob = ompl::base;
 namespace oc = ompl::control;
@@ -37,7 +44,8 @@ Coordinate start;
 Arena arena;
 
 // Constant Values
-const float friction_coeff = 0.75; //Coefficient of friction between robot wheels and the arena, find for your specific arena
+double dt = 0.01; //time between updates
+double friction_coeff = 0.75;
 
 // Finds location of the executable to find file location 
 #if defined(_WIN32)
@@ -52,9 +60,7 @@ const float friction_coeff = 0.75; //Coefficient of friction between robot wheel
 class RobotProjection : public ob::ProjectionEvaluator
 {
 public:
-    RobotProjection(const ob::StateSpace *space,
-                    RobotModel const    &model,
-                    Arena const         &arena)
+    RobotProjection(const ob::StateSpace *space)
       : ob::ProjectionEvaluator(space)
       , model_(model)
       , arena_(arena)
@@ -74,22 +80,17 @@ public:
         const auto *compound =
             state->as<ob::CompoundStateSpace::StateType>();
 
-        // 2) Subspace 0 = SE(2): extract x,y,θ
-        const auto *se2 =
-            compound->as<ob::SE2StateSpace::StateType>(0);
+        const auto *se2 = compound->as<ob::SE2StateSpace::StateType>(0);
         double x     = se2->getX();
         double y     = se2->getY();
         double theta = se2->getYaw();
 
-        // 3) Subspace 1 = RealVector(3): [v, ω, ω_weapon]
-        //    Here we’re assuming you packed them as [v, ω, ω_w]
-        const auto *rv =
-            compound->as<ob::RealVectorStateSpace::StateType>(1);
+
+        const auto *rv = compound->as<ob::RealVectorStateSpace::StateType>(1);
         double v       = rv->values[0];
         double omega   = rv->values[1];
         double omega_w = rv->values[2];
 
-        // 4) Fill projection (normalized into [–1,1] or [0,1] as you like)
         projection.resize(getDimension());
         projection(0) = x       / arena_.width;
         projection(1) = y       / arena_.length;
@@ -119,6 +120,7 @@ void robotODE(const ompl::control::ODESolver::StateType &q, const ompl::control:
     double u2 = controls[1]; //Right Drive
     double u3 = controls[2]; //Weapon Drive
 
+    // updateObstacles(obstacles,arena,dt);
     // Current State (q)
     double x        = q[0];
     double y        = q[1];
@@ -170,8 +172,8 @@ std::string getExecutableDir() {
 }
 
 // Splits a string by a delimiter
-std::vector<float> split(const std::string& str, char delimiter = ' ') {
-    std::vector<float> tokens;
+std::vector<double> split(const std::string& str, char delimiter = ' ') {
+    std::vector<double> tokens;
     std::stringstream ss(str);
     std::string token;
 
@@ -204,22 +206,22 @@ RobotModel calcProperties(std::string filePath){
     // Collects the necessary data from the file for the individual components
     std::ifstream inputFile(filePath);  
     std::string line;
-    std::vector<float> lineData;
-    float Weapon_MOI;
+    std::vector<double> lineData;
+    double Weapon_MOI;
     bool isClockwise;
     bool isBidirectional;
-    float Weapon_Power;
-    float Weapon_Motor_Max_Omega;
-    float Weapon_Reduction;
-    float Weapon_Alpha;
-    float Weapon_Omega;
-    float Drive_Power;
-    float Drive_Motor_Max_Omega;
-    float Robot_Mass;
-    float Robot_MOI;
+    double Weapon_Power;
+    double Weapon_Motor_Max_Omega;
+    double Weapon_Reduction;
+    double Weapon_Alpha;
+    double Weapon_Omega;
+    double Drive_Power;
+    double Drive_Motor_Max_Omega;
+    double Robot_Mass;
+    double Robot_MOI;
     // Calculates weapon spinup time
-    float spinUpTime;
-    float controlChannel;//numerical id for radio channel controlling the robot also functions as an id: 1=Left Drive, 2 = Right Drive, 3 = Weapon Motor
+    double spinUpTime;
+    double controlChannel;//numerical id for radio channel controlling the robot also functions as an id: 1=Left Drive, 2 = Right Drive, 3 = Weapon Motor
     // Sets values
     robotDynamics.alpha_max_l_drive = 0;
     robotDynamics.alpha_min_l_drive = 0;
@@ -235,19 +237,19 @@ RobotModel calcProperties(std::string filePath){
     robotDynamics.velocity_min = 0;
 
     // Stores data for force and torque calculations
-    float force_x;
-    float force_y;
-    float tempTorque;
-    float tan_x;
-    float tan_y;
-    float x_wheel;
-    float y_wheel;
-    float abs_force;
-    float theta_force;
-    float motor_alpha_max;
-    float drive_spin_up=0.0;
+    double force_x;
+    double force_y;
+    double tempTorque;
+    double tan_x;
+    double tan_y;
+    double x_wheel;
+    double y_wheel;
+    double abs_force;
+    double theta_force;
+    double motor_alpha_max;
+    double drive_spin_up=0.0;
 
-    float numWheels = 0;
+    double numWheels = 0;
     if (inputFile.is_open()) {
         while (std::getline(inputFile, line)) {
             numWheels = numWheels +1;
@@ -554,92 +556,250 @@ RobotModel calcProperties(std::string filePath){
     return RobotModel;
 }
 
+// Plans a path for a robot
+void plan(ompl::control::SimpleSetupPtr &ss) {
+    auto space = ss->getStateSpace();
+    auto si = ss->getSpaceInformation();
+
+    // Ensure the state space and control space are properly set up
+    if (!space || !si) {
+        std::cerr << "Error: State space or space information is not properly initialized." << std::endl;
+        return;
+    }
+
+    // Debugging: Check if the state space is a CompoundStateSpace
+    auto *compoundSpace = dynamic_cast<ob::CompoundStateSpace *>(space.get());
+    if (!compoundSpace) {
+        std::cerr << "Error: State space is not a CompoundStateSpace." << std::endl;
+        return;
+    }
+
+    // Debugging: Check subspaces
+    auto cartesianSpace = compoundSpace->as<ob::SE2StateSpace>(0);
+    auto velocitySpace = compoundSpace->as<ob::RealVectorStateSpace>(1);
+
+    if (!cartesianSpace || !velocitySpace) {
+        std::cerr << "Error: Subspaces are not properly configured." << std::endl;
+        return;
+    }
+
+    // Debugging: Print subspace information
+    std::cout << "CompoundStateSpace has " << compoundSpace->getSubspaceCount() << " subspaces." << std::endl;
+    std::cout << "Subspace 0: SE2StateSpace" << std::endl;
+    std::cout << "Subspace 1: RealVectorStateSpace (3 dimensions)" << std::endl;
+
+    // Initialize start state
+    ob::ScopedState<> startState(space);
+    auto *compoundState = static_cast<ob::CompoundStateSpace::StateType *>(startState.get());
+    if (!compoundState) {
+        std::cerr << "Error: Could not cast startState to CompoundState." << std::endl;
+        return;
+    }
+    auto *startSE2 = compoundState->as<ob::SE2StateSpace::StateType>(0);
+    auto *startRealVector = compoundState->as<ob::RealVectorStateSpace::StateType>(1);
+    if (!startSE2 || !startRealVector) {
+        std::cerr << "Error: Could not cast subspaces from CompoundState." << std::endl;
+        return;
+    }
+
+    startSE2->setXY(start.x, start.y);
+    startSE2->setYaw(start.theta);
+    startRealVector->values[0] = 0.0;
+    startRealVector->values[1] = 0.0;
+    startRealVector->values[2] = 0.0;
+
+    std::cout << "Start state initialized: x=" << start.x << ", y=" << start.y
+              << ", theta=" << start.theta << ", v=" << startRealVector->values[0]
+              << ", omega=" << startRealVector->values[1]
+              << ", omega_weapon=" << startRealVector->values[2] << std::endl;
+
+    try {
+        ss->addStartState(startState);
+        std::cout << "Start state added successfully." << std::endl;
+    } catch (const std::exception &e) {
+        std::cerr << "Exception while adding start state: " << e.what() << std::endl;
+        return;
+    }
+
+    // --- Repeat for goal state ---
+    ob::ScopedState<> goalState(space);
+    auto *goalCompound = static_cast<ob::CompoundStateSpace::StateType *>(goalState.get());
+    if (!goalCompound) {
+        std::cerr << "Error: Could not cast goalState to CompoundState." << std::endl;
+        return;
+    }
+    auto *goalSE2 = goalCompound->as<ob::SE2StateSpace::StateType>(0);
+    auto *goalRealVector = goalCompound->as<ob::RealVectorStateSpace::StateType>(1);
+    if (!goalSE2 || !goalRealVector) {
+        std::cerr << "Error: Could not cast subspaces from goal CompoundState." << std::endl;
+        return;
+    }
+    goalSE2->setXY(opponent.x, opponent.y);
+    goalSE2->setYaw(0.0);
+    goalRealVector->values[0] = 0.0;
+    goalRealVector->values[1] = 0.0;
+    goalRealVector->values[2] = 0.0;
+    ss->setGoalState(goalState);
+
+    // Setting up the planner
+    auto planner = std::make_shared<ompl::control::RG_RRT>(ss->getSpaceInformation());
+    planner->setGoalBias(0.05); // Set the goal bias
+    ss->setPlanner(planner);
+    ss->setup();
+    std::cout << "Planner set up successfully." << std::endl;
+
+    // Debugging: Check if the planner is properly set
+    if (!ss->getPlanner()) {
+        std::cerr << "Error: Planner is not set." << std::endl;
+        return;
+    }
+
+    // Attempt to solve the problem
+    ob::PlannerStatus solved = ss->solve(60.0); // 60 seconds timeout
+
+    if (solved && solved == ob::PlannerStatus::EXACT_SOLUTION) {
+        std::cout << "Found exact solution:" << std::endl;
+        ss->getSolutionPath().printAsMatrix(std::cout);
+    } else if (solved && solved == ob::PlannerStatus::APPROXIMATE_SOLUTION) {
+        std::cout << "Approximate solution found, but exact solution required. Try increasing solve time or check problem setup." << std::endl;
+        ss->getSolutionPath().printAsMatrix(std::cout);
+    } else {
+        std::cout << "NO SOLUTION FOUND.\nIt is possible that for some environments the constraints render the problem unsolvable. Consider adjusting obstacle placement or increasing solve time." << std::endl;
+    }
+}
+
+void benchmark(ompl::control::SimpleSetupPtr &ss)
+{
+    // Ensure start and goal are set before benchmarking
+    ss->clear();
+    // Set up start state
+    auto space = ss->getStateSpace();
+    ob::ScopedState<> startState(space);
+    auto *compoundState = static_cast<ob::CompoundStateSpace::StateType *>(startState.get());
+    auto *startSE2 = compoundState->as<ob::SE2StateSpace::StateType>(0);
+    auto *startRealVector = compoundState->as<ob::RealVectorStateSpace::StateType>(1);
+    startSE2->setXY(start.x, start.y);
+    startSE2->setYaw(start.theta);
+    startRealVector->values[0] = 0.0;
+    startRealVector->values[1] = 0.0;
+    startRealVector->values[2] = 0.0;
+    ss->addStartState(startState);
+
+    // Set up goal state
+    ob::ScopedState<> goalState(space);
+    auto *goalCompound = static_cast<ob::CompoundStateSpace::StateType *>(goalState.get());
+    auto *goalSE2 = goalCompound->as<ob::SE2StateSpace::StateType>(0);
+    auto *goalRealVector = goalCompound->as<ob::RealVectorStateSpace::StateType>(1);
+    goalSE2->setXY(opponent.x, opponent.y);
+    goalSE2->setYaw(0.0);
+    goalRealVector->values[0] = 0.0;
+    goalRealVector->values[1] = 0.0;
+    goalRealVector->values[2] = 0.0;
+    ss->setGoalState(goalState);
+
+    ompl::tools::Benchmark::Request request;
+    request.maxTime = 30.0; // seconds per planner
+    request.maxMem = 2048.0; // MB
+    request.runCount = 20;
+    request.displayProgress = true;
+    request.saveConsoleOutput = true;
+
+    ompl::tools::Benchmark b(*ss, "CombatRobotBenchmark");
+
+    // RG-RRT
+    auto rg_rrt = std::make_shared<ompl::control::RG_RRT>(ss->getSpaceInformation());
+    rg_rrt->setName("RG_RRT");
+    b.addPlanner(rg_rrt);
+
+    // RRT
+    auto rrt = std::make_shared<ompl::control::RRT>(ss->getSpaceInformation());
+    rrt->setName("RRT");
+    b.addPlanner(rrt);
+
+    // KPIECE1
+    auto kpiece = std::make_shared<ompl::control::KPIECE1>(ss->getSpaceInformation());
+    kpiece->setName("KPIECE1");
+
+    // Set projection for KPIECE1 (required)
+    if (!space->hasDefaultProjection()) {
+        space->registerDefaultProjection(std::make_shared<RobotProjection>(space.get()));
+    }
+    b.addPlanner(kpiece);
+
+    b.benchmark(request);
+    b.saveResultsToFile("benchmark_log.log");
+}
+
 ompl::control::SimpleSetupPtr createRobot()
 {
-    // stateSpace (x,y,theta),(vx,vy,omega),(ax,ay,alpha), (omega_weapon, alpha_weapon) =======================================
-    auto stateSpace = std::make_shared<ompl::base::CompoundStateSpace>();  
-    // Making subspaces --------------------------------------------
-    // cartesian subspace (x,y,theta) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Create a compound state space
+    auto stateSpace = std::make_shared<ompl::base::CompoundStateSpace>();
+
+    // Cartesian subspace (x, y, theta)
     auto cartesian = std::make_shared<ob::SE2StateSpace>();
     ob::RealVectorBounds cartesianBounds(2);
-    // x and y bounds are based off of the arena
-    // x bounds
-    cartesianBounds.setHigh(0,arena.width);
-    cartesianBounds.setLow(0,0);
-    // y bounds
-    cartesianBounds.setHigh(1,arena.length);
-    cartesianBounds.setLow(1,0);
-    // Theta bounds wrap arround in SE2 space so no more required
+    cartesianBounds.setLow(0, 0); // x bounds
+    cartesianBounds.setHigh(0, arena.width);
+    cartesianBounds.setLow(1, 0); // y bounds
+    cartesianBounds.setHigh(1, arena.length);
     cartesian->setBounds(cartesianBounds);
-    // velocity subspace (vx,vy,omega) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // Velocity subspace (v, omega, omega_weapon)
     auto velocity = std::make_shared<ob::RealVectorStateSpace>(3);
     ob::RealVectorBounds velocityBounds(3);
-    // v bounds are based on the max and minimum velocity
-    velocityBounds.setHigh(0,model.robotDynamics.velocity_max);
-    velocityBounds.setLow(0,model.robotDynamics.velocity_min);
-    // omega bounds based on the max and in angular velocity
-    velocityBounds.setHigh(1,model.robotDynamics.omega_max);
-    velocityBounds.setLow(1,model.robotDynamics.omega_min);
-    // omega_robot based on the max and min angular velocity of the robot's weapon
-    velocityBounds.setHigh(0,model.robotDynamics.omega_weapon_max);
-    velocityBounds.setLow(0,model.robotDynamics.omega_weapon_min);
-    // Applies bounds to velocity
+    velocityBounds.setLow(0, model.robotDynamics.velocity_min); // v bounds
+    velocityBounds.setHigh(0, model.robotDynamics.velocity_max);
+    velocityBounds.setLow(1, model.robotDynamics.omega_min); // omega bounds
+    velocityBounds.setHigh(1, model.robotDynamics.omega_max);
+    velocityBounds.setLow(2, model.robotDynamics.omega_weapon_min); // omega_weapon bounds
+    velocityBounds.setHigh(2, model.robotDynamics.omega_weapon_max);
     velocity->setBounds(velocityBounds);
-    // Applies subspaces to robot space ---------------------------------------------------
-    stateSpace->addSubspace(cartesian,1.0);
-    stateSpace->addSubspace(velocity,1.0);
-    
-    // Control Space (leftDrive,rightDrive,weaponDrive) ======================================================================
-    auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace,3);
-    ob::RealVectorBounds controlBounds(3);
-    // left drive [-1,1]
-    controlBounds.setLow(0,-1);
-    controlBounds.setHigh(0,1);
-    // right drive [-1,1]
-    controlBounds.setLow(1,-1);
-    controlBounds.setHigh(1,1);
-    // weapon drive [-1,1] or [0,1]
-    if(abs(model.robotDynamics.alpha_weapon_max) == abs(model.robotDynamics.alpha_weapon_min)){
-        controlBounds.setLow(2,-1);
-        controlBounds.setHigh(2,1);
-    }
-    else{
-        controlBounds.setLow(2,0);
-        controlBounds.setHigh(2,1);
-    }
 
+    // Add subspaces to the compound state space
+    stateSpace->addSubspace(cartesian, 1.0); // Cartesian subspace
+    stateSpace->addSubspace(velocity, 0.5);  // Velocity subspace
+
+    // Create a control space
+    auto controlSpace = std::make_shared<oc::RealVectorControlSpace>(stateSpace, 3);
+    ob::RealVectorBounds controlBounds(3);
+    controlBounds.setLow(0, -1); // left drive
+    controlBounds.setHigh(0, 1);
+    controlBounds.setLow(1, -1); // right drive
+    controlBounds.setHigh(1, 1);
+    controlBounds.setLow(2, model.robotDynamics.alpha_weapon_min == model.robotDynamics.alpha_weapon_max ? -1 : 0); // weapon drive
+    controlBounds.setHigh(2, 1);
     controlSpace->setBounds(controlBounds);
 
-    // Creating a state info object
-    auto si = std::make_shared<oc::SimpleSetup>(controlSpace);
+    // Create a SimpleSetup object
+    auto ss = std::make_shared<oc::SimpleSetup>(controlSpace);
 
-    auto odeSolver = std::make_shared<oc::ODEBasicSolver<>>(si->getSpaceInformation(), &robotODE);
+    // Set the ODE solver and state propagator
+    auto odeSolver = std::make_shared<oc::ODEBasicSolver<>>(ss->getSpaceInformation(), &robotODE);
+    ss->getSpaceInformation()->setStatePropagator(oc::ODESolver::getStatePropagator(odeSolver));
+    
+    // NEW: Set propagation step size to dt and explicitly set control step counts
+    ss->getSpaceInformation()->setPropagationStepSize(dt);
+    ss->getSpaceInformation()->setMinMaxControlDuration(dt, dt * 10);
 
-    // Sets State Propagator
-    si->getSpaceInformation()->setStatePropagator(oc::ODESolver::getStatePropagator(odeSolver));
-
-    Obstacles ob = obstacles;
-    Opponent op = opponent;
-    RobotModel m = model;
-    Arena a = arena;
-    si->setStateValidityChecker([ob, op, m, a](const ob::State *state) {
-        // Get the compound state
+    // Set the state validity checker
+    ss->setStateValidityChecker([=](const ob::State *state) {
         const auto *compoundState = state->as<ob::CompoundStateSpace::StateType>();
         if (!compoundState) return false;
-        
-        // Get the SE2 component (first subspace - index 0)
-        const auto* se2State = compoundState->as<ob::SE2StateSpace::StateType>(0);
-        
-        // Extract position and orientation
+
+        const auto *se2State = compoundState->as<ob::SE2StateSpace::StateType>(0);
         double x = se2State->getX();
         double y = se2State->getY();
         double theta = se2State->getYaw();
-        
-        // Call the validity function
-        return checkIfRobotValid(m, op, ob, x, y, theta, a);
+
+        bool valid = checkIfRobotValid(model, opponent, obstacles, x, y, theta, arena);
+        if (!valid) {
+            // Uncomment for debugging:
+            // std::cout << "Invalid state: x=" << x << " y=" << y << " theta=" << theta << std::endl;
+        }
+        return valid;
     });
-    
-    return si;
+
+    return ss;
 }
 
 
@@ -682,6 +842,10 @@ int main(int /* argc */, char ** /* argv */)
 
     // gets the data needed for creating a kinodynamic model from the inputted file
     model = calcProperties(filePath);
+
+    // Ensure robot.txt is in the build folder (relative to the executable location)
+    std::string build_dir = getExecutableDir();
+    std::filesystem::copy_file(filePath, build_dir + "/robot.txt", std::filesystem::copy_options::overwrite_existing);
 
     // Choose the arena for the robot to fight in
     int arenaChoice;
@@ -750,10 +914,115 @@ int main(int /* argc */, char ** /* argv */)
     opponent = generateOpponent(arena,obstacles);
 
     start = generateStartingPosition(arena,obstacles,opponent,model);
+    std::cout << "Chosen start: x=" << start.x << " y=" << start.y << " theta=" << start.theta << std::endl;
+
+    std::cout << "Static obstacles: " << obstacles.staticObstacles.size() << std::endl;
+    for (const auto& o : obstacles.staticObstacles) {
+        std::cout << "  Static: x=" << o.x << " y=" << o.y << " r=" << o.radius << std::endl;
+    }
+    std::cout << "Dynamic obstacles: " << obstacles.dynamicObstacles.size() << std::endl;
+    for (const auto& o : obstacles.dynamicObstacles) {
+        std::cout << "  Dynamic: x=" << o.x << " y=" << o.y << " r=" << o.radius << std::endl;
+    }
 
     ompl::control::SimpleSetupPtr si = createRobot();
-   
 
+    // --- Set up goal as a region with radius opponent.radius ---
+    {
+        auto space = si->getStateSpace();
+        ob::ScopedState<> goalState(space);
+        auto *goalCompound = static_cast<ob::CompoundStateSpace::StateType *>(goalState.get());
+        auto *goalSE2 = goalCompound->as<ob::SE2StateSpace::StateType>(0);
+        auto *goalRealVector = goalCompound->as<ob::RealVectorStateSpace::StateType>(1);
+
+        goalSE2->setXY(opponent.x, opponent.y);
+        goalSE2->setYaw(0.0);
+        goalRealVector->values[0] = 0.0;
+        goalRealVector->values[1] = 0.0;
+        goalRealVector->values[2] = 0.0;
+
+        // Define a goal region class
+        class GoalRegionWithRadius : public ob::GoalRegion {
+        public:
+            GoalRegionWithRadius(const ob::SpaceInformationPtr &si, const ob::ScopedState<> &goal, double radius)
+                : ob::GoalRegion(si), goal_(goal), radius_(radius) {
+                setThreshold(radius_);
+            }
+            double distanceGoal(const ob::State *state) const override {
+                const auto *compound = state->as<ob::CompoundStateSpace::StateType>();
+                const auto *se2 = compound->as<ob::SE2StateSpace::StateType>(0);
+                double x = se2->getX();
+                double y = se2->getY();
+                double gx = goal_[0];
+                double gy = goal_[1];
+                return std::hypot(x - gx, y - gy);
+            }
+        private:
+            ob::ScopedState<> goal_;
+            double radius_;
+        };
+
+        auto goalRegion = std::make_shared<GoalRegionWithRadius>(si->getSpaceInformation(), goalState, opponent.radius);
+        si->setGoal(goalRegion);
+    }
+
+    // Export start and goal region for visualization
+    {
+        std::ofstream startFile(build_dir + "/start.txt");
+        startFile << start.x << " " << start.y << " " << start.theta << std::endl;
+        startFile.close();
+
+        std::ofstream goalRegionFile(build_dir + "/goal_region.txt");
+        goalRegionFile << opponent.x << " " << opponent.y << " " << opponent.radius << std::endl;
+        goalRegionFile.close();
+    }
+
+    // Run benchmark
+    benchmark(si);
+
+    // Optionally, still run plan(si) for normal output
+    // plan(si);
+
+    // Output files for visualization (write to build folder)
+    {
+        std::ofstream obsFile(build_dir + "/obstacles.txt");
+        for(const auto& o : obstacles.staticObstacles)
+        {
+            obsFile << o.x << " " << o.y << " " << (o.radius*2) << " " << (o.radius*2) << std::endl;
+        }
+        obsFile.close();
+
+        std::ofstream dynObsFile(build_dir + "/dynamic_obstacles.txt");
+        for(const auto& o : obstacles.dynamicObstacles)
+        {
+            dynObsFile << o.x0 << " " << o.y0 << " " << o.x << " " << o.y << " " << o.radius 
+                       << " " << o.theta << " " << o.velocity << std::endl;
+        }
+        dynObsFile.close();
+
+        std::ofstream oppFile(build_dir + "/opponent.txt");
+        oppFile << opponent.x0 << " " << opponent.y0 << " " << opponent.x << " " 
+                << opponent.y << " " << opponent.radius << " " << opponent.theta << " " 
+                << opponent.velocity << std::endl;
+        oppFile.close();
+
+        oc::PathControl path = si->getSolutionPath();
+        if(path.getStateCount() > 0)
+        {
+            std::ofstream pathFile(build_dir + "/path.txt");
+            for (std::size_t i = 0; i < path.getStateCount(); i++)
+            {
+                const ob::State* state = path.getState(i);
+                auto compound = state->as<ob::CompoundStateSpace::StateType>();
+                auto se2 = compound->as<ob::SE2StateSpace::StateType>(0);
+                double x = se2->getX();
+                double y = se2->getY();
+                double theta = se2->getYaw();
+                pathFile << x << " " << y << " " << theta << std::endl;
+            }
+            pathFile.close();
+        }
+    }
     
     return 0;
 }

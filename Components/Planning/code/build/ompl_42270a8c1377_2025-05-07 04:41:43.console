@@ -1,0 +1,49 @@
+Info:    Beginning benchmark
+Info:    No planner specified. Using default.
+Info:    KPIECE1: Attempting to use default projection.
+Info:    Preparing for run 0 of control_RG_RRT
+Error:   There was an error executing planner control_RG_RRT, run = 0
+*** RG_RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 1 of control_RG_RRT
+Error:   There was an error executing planner control_RG_RRT, run = 1
+*** RG_RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 2 of control_RG_RRT
+Error:   There was an error executing planner control_RG_RRT, run = 2
+*** RG_RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 0 of control_RRT
+Error:   There was an error executing planner control_RRT, run = 0
+*** RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 1 of control_RRT
+Error:   There was an error executing planner control_RRT, run = 1
+*** RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 2 of control_RRT
+Error:   There was an error executing planner control_RRT, run = 2
+*** RRT: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 0 of control_KPIECE1
+Error:   There was an error executing planner control_KPIECE1, run = 0
+*** KPIECE1: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 1 of control_KPIECE1
+Error:   There was an error executing planner control_KPIECE1, run = 1
+*** KPIECE1: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Preparing for run 2 of control_KPIECE1
+Error:   There was an error executing planner control_KPIECE1, run = 2
+*** KPIECE1: No start states specified
+
+         at line 152 in /ompl/src/ompl/tools/benchmark/src/Benchmark.cpp
+Info:    Benchmark complete
