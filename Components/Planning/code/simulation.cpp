@@ -641,13 +641,6 @@ void plan(ompl::control::SimpleSetupPtr &ss) {
     goalRealVector->values[2] = 0.0;
     ss->setGoalState(goalState);
 
-    // Setting up the planner
-    auto planner = std::make_shared<ompl::control::RG_RRT>(ss->getSpaceInformation());
-    planner->setGoalBias(0.05); // Set the goal bias
-    ss->setPlanner(planner);
-    ss->setup();
-    std::cout << "Planner set up successfully." << std::endl;
-
     // Debugging: Check if the planner is properly set
     if (!ss->getPlanner()) {
         std::cerr << "Error: Planner is not set." << std::endl;
@@ -812,29 +805,23 @@ int main(int /* argc */, char ** /* argv */)
      filePath = filePath + "/robot_data/";
 
     // Choosing the robot for analysis-add more if desired
-    int choice;
+    int choice=1;
     do
     {
         std::cout << "What Robot do you want to make a motion plan for?" << std::endl;
         std::cout << " (1) Very Original" << std::endl;
-        std::cout << " (2) Double Stuffed" << std::endl;
-        std::cout << " (3) Custom Robot" << std::endl;
+        std::cout << " (2) Custom Robot" << std::endl;
 
         std::cin >> choice;
-    } while (choice < 1 || choice > 3);
+    } while (choice < 1 || choice > 2);
 
     std::string robot;
     if(choice == 1){
         robot = "Very_Original.txt";
     }
     else{
-        if(choice == 2){
-            robot ="Double_Stuffed.txt";
-        }
-        else{
-            std::cout<<"Enter the name of the file containing your robot's data" <<std::endl;
-            std::cin >>robot;
-        }
+        std::cout<<"Enter the name of the file containing your robot's data" <<std::endl;
+        std::cin >>robot;
     }
 
     // Gets file path to the file with the robot's information on it
@@ -848,16 +835,16 @@ int main(int /* argc */, char ** /* argv */)
     std::filesystem::copy_file(filePath, build_dir + "/robot.txt", std::filesystem::copy_options::overwrite_existing);
 
     // Choose the arena for the robot to fight in
-    int arenaChoice;
-    do
-    {
-        std::cout << "What Arena do you want the robot to fight in" << std::endl;
-        std::cout << " (1) 3lb Robot Arena NHRL" << std::endl;
-        std::cout << " (2) 12lb/30lb Robot Arena NHRL" << std::endl;
-        std::cout << " (3) Custom Arena" << std::endl;
+    int arenaChoice=1;
+    // do
+    // {
+    //     std::cout << "What Arena do you want the robot to fight in" << std::endl;
+    //     std::cout << " (1) 3lb Robot Arena NHRL" << std::endl;
+    //     std::cout << " (2) 12lb/30lb Robot Arena NHRL" << std::endl;
+    //     std::cout << " (3) Custom Arena" << std::endl;
 
-        std::cin >> arenaChoice;
-    } while (arenaChoice < 1 || arenaChoice > 3);
+    //     std::cin >> arenaChoice;
+    // } while (arenaChoice < 1 || arenaChoice > 3);
     if(arenaChoice == 1){
         arena.length = 2.438;
         arena.width = 2.438;
@@ -874,18 +861,18 @@ int main(int /* argc */, char ** /* argv */)
             std::cin >> arena.length;
         }
     }
-    int obstacleChoice;
-    // Generates Obstacles based on basic inputs
-    do
-    {
-        std::cout << "What Situation do you want the robot to fight in" << std::endl;
-        std::cout << " (1) 0 static obstacles, 1 dynamic obstacle" << std::endl;
-        std::cout << " (2) 1 static obstacle, 0 dynamic obstacles" << std::endl;
-        std::cout << " (3) 1 static obstacle, 1 dynamic obstacle" << std::endl;
-        std::cout << " (4) Custom Obstacles" << std::endl;
+    int obstacleChoice=3;
+    // // Generates Obstacles based on basic inputs
+    // do
+    // {
+    //     std::cout << "What Situation do you want the robot to fight in" << std::endl;
+    //     std::cout << " (1) 0 static obstacles, 1 dynamic obstacle" << std::endl;
+    //     std::cout << " (2) 1 static obstacle, 0 dynamic obstacles" << std::endl;
+    //     std::cout << " (3) 1 static obstacle, 1 dynamic obstacle" << std::endl;
+    //     std::cout << " (4) Custom Obstacles" << std::endl;
 
-        std::cin >> obstacleChoice;
-    } while (obstacleChoice < 1 || obstacleChoice > 4);
+    //     std::cin >> obstacleChoice;
+    // } while (obstacleChoice < 1 || obstacleChoice > 4);
     // Maximum obstacle size is determined by a housebot's size i.e. 0.3 m. max speed is 9m/s
     int numDynamic=0;
     int numStatic=0;
@@ -977,11 +964,51 @@ int main(int /* argc */, char ** /* argv */)
         goalRegionFile.close();
     }
 
-    // Run benchmark
-    benchmark(si);
+    // Ask user if they want to run benchmark or just plan
+    int runBenchmark = 0;
+    std::cout << "Choose operation:" << std::endl;
+    std::cout << " (1) Run benchmark" << std::endl;
+    std::cout << " (2) Run single plan" << std::endl;
+    std::cin >> runBenchmark;
 
-    // Optionally, still run plan(si) for normal output
-    // plan(si);
+    if(runBenchmark == 1) {
+        benchmark(si);
+    } else {
+        // Ask user for planner choice
+        int plannerChoice = 1;
+        std::cout << "Choose planner:" << std::endl;
+        std::cout << " (1) RG-RRT" << std::endl;
+        std::cout << " (2) RRT" << std::endl;
+        std::cout << " (3) KPIECE1" << std::endl;
+        std::cin >> plannerChoice;
+
+        // Set the planner based on user choice
+        if (plannerChoice == 1) {
+            auto planner = std::make_shared<ompl::control::RG_RRT>(si->getSpaceInformation());
+            planner->setGoalBias(0.05);
+            si->setPlanner(planner);
+        } else if (plannerChoice == 2) {
+            auto planner = std::make_shared<ompl::control::RRT>(si->getSpaceInformation());
+            planner->setGoalBias(0.05);
+            si->setPlanner(planner);
+        } else if (plannerChoice == 3) {
+            auto planner = std::make_shared<ompl::control::KPIECE1>(si->getSpaceInformation());
+            planner->setName("KPIECE1");
+            // Set projection for KPIECE1 if not already set
+            auto space = si->getStateSpace();
+            if (!space->hasDefaultProjection()) {
+                space->registerDefaultProjection(std::make_shared<RobotProjection>(space.get()));
+            }
+            si->setPlanner(planner);
+        } else {
+            std::cout << "Invalid planner choice, defaulting to RG-RRT." << std::endl;
+            auto planner = std::make_shared<ompl::control::RG_RRT>(si->getSpaceInformation());
+            planner->setGoalBias(0.05);
+            si->setPlanner(planner);
+        }
+        si->setup();
+        plan(si);
+    }
 
     // Output files for visualization (write to build folder)
     {

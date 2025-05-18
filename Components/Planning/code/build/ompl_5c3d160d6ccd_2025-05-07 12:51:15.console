@@ -3,10 +3,12 @@ Info:    No planner specified. Using default.
 Info:    KPIECE1: Attempting to use default projection.
 Info:    Preparing for run 0 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 218, Iterations: 217
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 1 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 419, Iterations: 418
+Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
+Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 2 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
@@ -21,18 +23,17 @@ Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 5 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
-Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    RG_RRT: Planning completed. Total states: 297, Iterations: 296
 Info:    Preparing for run 6 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 132, Iterations: 131
+Info:    RG_RRT: Planning completed. Total states: 206, Iterations: 205
 Info:    Preparing for run 7 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 8 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 2248, Iterations: 2247
+Info:    RG_RRT: Planning completed. Total states: 1164, Iterations: 1163
 Info:    Preparing for run 9 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
@@ -43,117 +44,114 @@ Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 11 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
-Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    RG_RRT: Planning completed. Total states: 393, Iterations: 392
 Info:    Preparing for run 12 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 490, Iterations: 489
+Info:    RG_RRT: Planning completed. Total states: 1024, Iterations: 1023
 Info:    Preparing for run 13 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 14 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 420, Iterations: 419
+Info:    RG_RRT: Planning completed. Total states: 1056, Iterations: 1055
 Info:    Preparing for run 15 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
-Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    RG_RRT: Planning completed. Total states: 112, Iterations: 111
 Info:    Preparing for run 16 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    RG_RRT: Planning completed. Total states: 1159, Iterations: 1158
-Info:    Preparing for run 17 of control_RG_RRT
-Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    Preparing for run 17 of control_RG_RRT
+Info:    RG_RRT: Starting planning with 1 initial states
+Info:    RG_RRT: Planning completed. Total states: 597, Iterations: 596
 Info:    Preparing for run 18 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
 Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
 Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
 Info:    Preparing for run 19 of control_RG_RRT
 Info:    RG_RRT: Starting planning with 1 initial states
-Info:    ProblemDefinition: Adding approximate solution from planner RG_RRT
-Info:    RG_RRT: Planning completed. Total states: 5001, Iterations: 5000
+Info:    RG_RRT: Planning completed. Total states: 2182, Iterations: 2181
 Info:    Preparing for run 0 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 563085 states
+Info:    RRT: Created 569904 states
 Info:    Preparing for run 1 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 524351 states
+Info:    RRT: Created 573074 states
 Info:    Preparing for run 2 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 572570 states
+Info:    RRT: Created 521178 states
 Info:    Preparing for run 3 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 558254 states
+Info:    RRT: Created 551239 states
 Info:    Preparing for run 4 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 515560 states
+Info:    RRT: Created 506654 states
 Info:    Preparing for run 5 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 461349 states
+Info:    RRT: Created 497991 states
 Info:    Preparing for run 6 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 523992 states
+Info:    RRT: Created 530484 states
 Info:    Preparing for run 7 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 549716 states
+Info:    RRT: Created 520488 states
 Info:    Preparing for run 8 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 583707 states
+Info:    RRT: Created 530755 states
 Info:    Preparing for run 9 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 507418 states
+Info:    RRT: Created 524934 states
 Info:    Preparing for run 10 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 517431 states
+Info:    RRT: Created 471580 states
 Info:    Preparing for run 11 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 514824 states
+Info:    RRT: Created 512097 states
 Info:    Preparing for run 12 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 526041 states
+Info:    RRT: Created 467605 states
 Info:    Preparing for run 13 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 483603 states
+Info:    RRT: Created 508323 states
 Info:    Preparing for run 14 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 497258 states
+Info:    RRT: Created 544740 states
 Info:    Preparing for run 15 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 545831 states
+Info:    RRT: Created 555240 states
 Info:    Preparing for run 16 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 503921 states
+Info:    RRT: Created 547824 states
 Info:    Preparing for run 17 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 466302 states
+Info:    RRT: Created 515779 states
 Info:    Preparing for run 18 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 489168 states
+Info:    RRT: Created 510481 states
 Info:    Preparing for run 19 of control_RRT
 Info:    RRT: Starting planning with 1 states already in datastructure
 Info:    ProblemDefinition: Adding approximate solution from planner RRT
-Info:    RRT: Created 541764 states
+Info:    RRT: Created 497707 states
 Info:    Preparing for run 0 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -189,238 +187,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 16248 states in 12538 cells (0 internal + 12538 external)
+Info:    KPIECE1: Created 3049 states in 2918 cells (0 internal + 2918 external)
 Info:    Preparing for run 1 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -471,107 +238,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 10660 states in 8831 cells (0 internal + 8831 external)
+Info:    KPIECE1: Created 3930 states in 3667 cells (0 internal + 3667 external)
 Info:    Preparing for run 2 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -597,11 +264,198 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 2390 states in 2306 cells (0 internal + 2306 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 8068 states in 7002 cells (0 internal + 7002 external)
 Info:    Preparing for run 3 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 354 states in 352 cells (0 internal + 352 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 7092 states in 6273 cells (0 internal + 6273 external)
 Info:    Preparing for run 4 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -633,7 +487,43 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 3872 states in 3769 cells (0 internal + 3769 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 5393 states in 4845 cells (0 internal + 4845 external)
 Info:    Preparing for run 5 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -643,127 +533,79 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 8728 states in 7529 cells (0 internal + 7529 external)
+Info:    KPIECE1: Created 895 states in 884 cells (0 internal + 884 external)
 Info:    Preparing for run 6 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 473 states in 469 cells (0 internal + 469 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 5321 states in 4831 cells (0 internal + 4831 external)
 Info:    Preparing for run 7 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -775,61 +617,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 5435 states in 4970 cells (0 internal + 4970 external)
+Info:    KPIECE1: Created 906 states in 888 cells (0 internal + 888 external)
 Info:    Preparing for run 8 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -882,16 +670,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 5070 states in 4635 cells (0 internal + 4635 external)
+Info:    KPIECE1: Created 4071 states in 3769 cells (0 internal + 3769 external)
 Info:    Preparing for run 9 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -942,7 +721,78 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 4231 states in 3921 cells (0 internal + 3921 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 8817 states in 7639 cells (0 internal + 7639 external)
 Info:    Preparing for run 10 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -958,7 +808,216 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 1336 states in 1309 cells (0 internal + 1309 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 13335 states in 10577 cells (0 internal + 10577 external)
 Info:    Preparing for run 11 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1019,77 +1078,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 9354 states in 8037 cells (0 internal + 8037 external)
+Info:    KPIECE1: Created 4954 states in 4532 cells (0 internal + 4532 external)
 Info:    Preparing for run 12 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1104,120 +1093,7 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 9260 states in 7896 cells (0 internal + 7896 external)
+Info:    KPIECE1: Created 1162 states in 1142 cells (0 internal + 1142 external)
 Info:    Preparing for run 13 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1254,7 +1130,11 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 2992 states in 2858 cells (0 internal + 2858 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 3162 states in 3019 cells (0 internal + 3019 external)
 Info:    Preparing for run 14 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1284,7 +1164,80 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 2760 states in 2646 cells (0 internal + 2646 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 7069 states in 6219 cells (0 internal + 6219 external)
 Info:    Preparing for run 15 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1315,7 +1268,62 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 2512 states in 2407 cells (0 internal + 2407 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 6330 states in 5695 cells (0 internal + 5695 external)
 Info:    Preparing for run 16 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1356,66 +1364,193 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 3493 states in 3330 cells (0 internal + 3330 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 13259 states in 10413 cells (0 internal + 10413 external)
 Info:    Preparing for run 17 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 4956 states in 4608 cells (0 internal + 4608 external)
+Info:    KPIECE1: Created 492 states in 489 cells (0 internal + 489 external)
 Info:    Preparing for run 18 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1437,7 +1572,16 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 1804 states in 1749 cells (0 internal + 1749 external)
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
+Info:    KPIECE1: Created 2631 states in 2532 cells (0 internal + 2532 external)
 Info:    Preparing for run 19 of control_KPIECE1
 Info:    KPIECE1: Starting planning with 1 states already in datastructure
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
@@ -1491,23 +1635,5 @@ Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
 Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Debug:   KPIECE1: Numerical precision limit reached. Resetting costs.
-Info:    KPIECE1: Created 5673 states in 5167 cells (0 internal + 5167 external)
+Info:    KPIECE1: Created 4428 states in 4064 cells (0 internal + 4064 external)
 Info:    Benchmark complete

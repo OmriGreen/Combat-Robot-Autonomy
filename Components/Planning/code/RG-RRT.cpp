@@ -188,14 +188,15 @@ ompl::base::PlannerStatus ompl::control::RG_RRT::solve(const base::PlannerTermin
         Motion *newMotion = new Motion(siC_);
         si_->copyState(newMotion->state, randomState);
         siC_->copyControl(newMotion->control, bestControl ? bestControl : randomControl);
+        newMotion->steps = bestControlDuration;  
         newMotion->parent = selectedMotion;
-
+        
         nn_->add(newMotion);
 
         // Goal checking with approximation
         double goalDistance = 0.0;
         bool goalReached = goal->isSatisfied(newMotion->state, &goalDistance);
-
+        
         if (goalReached) 
         {
             solution = newMotion;

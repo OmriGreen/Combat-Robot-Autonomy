@@ -1,17 +1,17 @@
 OMPL version 1.6.0
 Experiment CombatRobotBenchmark
 0 experiment properties
-Running on 42270a8c1377
-Starting at 2025-05-07 04:42:57
+Running on 5c3d160d6ccd
+Starting at 2025-05-07 12:51:15
 <<<|
 Properties of the state space 'CompoundSpace0'
   - signature: 10 0 6 4 3 1 2 2 1 1 3 
   - dimension: 6
   - extent: 1749.87
   - sanity checks for state space passed
-  - probability of valid states: 0.755
-  - average length of a valid motion: 353.664
-  - average number of samples drawn per second: sampleUniform()=1.04938e+07 sampleUniformNear()=7.51332e+06 sampleGaussian()=4.01123e+06
+  - probability of valid states: 0.713
+  - average length of a valid motion: 282.439
+  - average number of samples drawn per second: sampleUniform()=8.99159e+06 sampleUniformNear()=8.37591e+06 sampleGaussian()=4.03752e+06
 Settings for the state space 'CompoundSpace0'
   - state validity check resolution: 1%
   - valid segment count factor: 1
@@ -38,18 +38,18 @@ Real vector state space 'RealVectorSpace4' of dimension 3 with bounds:
 Registered projections:
   - <default>
 Projection of dimension 6
-Cell sizes (inferred by sampling): [0.0547474 0.0538258 0.108636 0.109398 0.108247 0.0544792]
+Cell sizes (inferred by sampling): [0.0531143 0.0543552 0.107052 0.109847 0.108319 0.0547077]
 
 Declared parameters:
 longest_valid_segment_fraction = 0.01
 max_control_duration = 10
 min_control_duration = 1
-projection.cellsize.0 = 0.0547474
-projection.cellsize.1 = 0.0538258
-projection.cellsize.2 = 0.108636
-projection.cellsize.3 = 0.109398
-projection.cellsize.4 = 0.108247
-projection.cellsize.5 = 0.0544792
+projection.cellsize.0 = 0.0531143
+projection.cellsize.1 = 0.0543552
+projection.cellsize.2 = 0.107052
+projection.cellsize.3 = 0.109847
+projection.cellsize.4 = 0.108319
+projection.cellsize.5 = 0.0547077
 projection.cellsize_factor = 0
 propagation_step_size = 0.01
 valid_segment_count_factor = 1
@@ -70,10 +70,10 @@ SO2State [0]
 ]
 RealVectorState [0 0 0]
 ]
-Goal state, threshold = 2.22045e-16, memory address = 0x55ca0f639db0, state = 
+Goal state, threshold = 2.22045e-16, memory address = 0x56403edfadd0, state = 
 Compound state [
 Compound state [
-RealVectorState [0.976275 2.31469]
+RealVectorState [2.39595 0.704562]
 SO2State [0]
 ]
 RealVectorState [0 0 0]
@@ -137,11 +137,11 @@ Vulnerability Spectre v2:             Mitigation; Retpolines; IBPB conditional; 
 Vulnerability Srbds:                  Not affected
 Vulnerability Tsx async abort:        Not affected
 |>>>
-10969965013864871 is the random seed
+10969994312426710 is the random seed
 30 seconds per run
-1024 MB per run
-3 runs per planner
-106.675 seconds spent to collect the data
+2048 MB per run
+20 runs per planner
+679.861 seconds spent to collect the data
 1 enum type
 status|Unknown status|Invalid start|Invalid goal|Unrecognized goal type|Timeout|Approximate solution|Exact solution|Crash|Unknown status|Unknown status
 3 planners
@@ -152,12 +152,12 @@ intermediate_states = 0
 longest_valid_segment_fraction = 0.01
 max_control_duration = 10
 min_control_duration = 1
-projection.cellsize.0 = 0.0547474
-projection.cellsize.1 = 0.0538258
-projection.cellsize.2 = 0.108636
-projection.cellsize.3 = 0.109398
-projection.cellsize.4 = 0.108247
-projection.cellsize.5 = 0.0544792
+projection.cellsize.0 = 0.0531143
+projection.cellsize.1 = 0.0543552
+projection.cellsize.2 = 0.107052
+projection.cellsize.3 = 0.109847
+projection.cellsize.4 = 0.108319
+projection.cellsize.5 = 0.0547077
 projection.cellsize_factor = 0
 propagation_step_size = 0.01
 valid_segment_count_factor = 1
@@ -175,10 +175,27 @@ solved BOOLEAN
 status ENUM
 time REAL
 valid segment fraction REAL
-3 runs
-1; 1; 5000; 5001; 11.8633; 0; 1.12225; 0; 1; 0; 5; 2.32026; 0; 
-1; 0; 5000; 5001; 13.2461; 0; 1.12225; 0; 5; 0; 5; 3.22198; 0; 
-0; 1; 165; 166; 13.9961; 0; 0; 0; 2; 1; 6; 0.0239063; 0; 
+20 runs
+1; 1; 5000; 5001; 11.8828; 0; 1.28447; 0; 1; 0; 5; 1.7322; 0; 
+1; 0; 5000; 5001; 13.3359; 0; 61.4209; 0.01; 1; 0; 5; 3.81042; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 2.67962; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 1.59023; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 2.08416; 0; 
+0; 0; 296; 297; 14.0859; 0; 0; 0.04; 3; 1; 6; 0.0433137; 0; 
+0; 0; 205; 206; 14.0859; 0; 0; 0.07; 4; 1; 6; 0.0294374; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 1.6355; 0; 
+0; 0; 1163; 1164; 14.0859; 0; 0; 0.06; 4; 1; 6; 0.209413; 0; 
+1; 0; 5000; 5001; 14.0859; 0; 1.28447; 0.05; 2; 0; 5; 2.01549; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 2.43189; 0; 
+0; 0; 392; 393; 14.0859; 0; 0; 0.04; 4; 1; 6; 0.061707; 0; 
+0; 0; 1023; 1024; 14.0859; 0; 0; 0.01; 1; 1; 6; 0.429317; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 2.32546; 0; 
+0; 0; 1055; 1056; 14.0859; 0; 0; 0.02; 2; 1; 6; 0.200107; 0; 
+0; 0; 111; 112; 14.0859; 0; 0; 0.01; 1; 1; 6; 0.0161814; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 1.87573; 0; 
+0; 0; 596; 597; 14.0859; 0; 0; 0.03; 3; 1; 6; 0.102111; 0; 
+1; 1; 5000; 5001; 14.0859; 0; 1.28447; 0; 1; 0; 5; 1.67215; 0; 
+0; 0; 2181; 2182; 14.0859; 0; 0; 0.15; 6; 1; 6; 0.413429; 0; 
 .
 control_RRT
 14 common properties
@@ -187,12 +204,12 @@ intermediate_states = 0
 longest_valid_segment_fraction = 0.01
 max_control_duration = 10
 min_control_duration = 1
-projection.cellsize.0 = 0.0547474
-projection.cellsize.1 = 0.0538258
-projection.cellsize.2 = 0.108636
-projection.cellsize.3 = 0.109398
-projection.cellsize.4 = 0.108247
-projection.cellsize.5 = 0.0544792
+projection.cellsize.0 = 0.0531143
+projection.cellsize.1 = 0.0543552
+projection.cellsize.2 = 0.107052
+projection.cellsize.3 = 0.109847
+projection.cellsize.4 = 0.108319
+projection.cellsize.5 = 0.0547077
 projection.cellsize_factor = 0
 propagation_step_size = 0.01
 valid_segment_count_factor = 1
@@ -210,10 +227,27 @@ solved BOOLEAN
 status ENUM
 time REAL
 valid segment fraction REAL
-3 runs
-1; 1; 579119; 579120; 251.246; 0; 1.82037; 0.02; 1; 0; 5; 30.2011; 0; 
-1; 1; 579414; 579415; 385.129; 0; 2.09635; 0.01; 1; 0; 5; 30.0026; 0; 
-1; 1; 583646; 583647; 410.363; 0; 2.69269; 0.06; 1; 0; 5; 30.202; 0; 
+20 runs
+1; 1; 569903; 569904; 246.961; 0; 2.31157; 0.06; 1; 0; 5; 30.2016; 0; 
+1; 1; 573073; 573074; 381.582; 0; 2.42539; 0.01; 1; 0; 5; 30.002; 0; 
+1; 1; 521177; 521178; 407.07; 0; 2.86352; 0.01; 1; 0; 5; 30.202; 0; 
+1; 1; 551238; 551239; 407.195; 0; 3.29017; 0.05; 1; 0; 5; 30.0046; 0; 
+1; 1; 506653; 506654; 408.242; 0; 2.92837; 0.01; 1; 0; 5; 30.0023; 0; 
+1; 1; 497990; 497991; 408.242; 0; 3.50038; 0.01; 1; 0; 5; 30.2016; 0; 
+1; 1; 530483; 530484; 408.242; 0; 2.15855; 0.08; 1; 0; 5; 30.2019; 0; 
+1; 1; 520487; 520488; 408.254; 0; 5.41624; 0.01; 1; 0; 5; 30.0022; 0; 
+1; 1; 530754; 530755; 408.254; 0; 5.73865; 0.01; 1; 0; 5; 30.0025; 0; 
+1; 1; 524933; 524934; 408.379; 0; 3.60947; 0.03; 1; 0; 5; 30.0023; 0; 
+1; 1; 471579; 471580; 408.629; 0; 3.42535; 0.01; 1; 0; 5; 30.204; 0; 
+1; 1; 512096; 512097; 408.629; 0; 4.68965; 0.01; 1; 0; 5; 30.2012; 0; 
+1; 1; 467604; 467605; 408.629; 0; 4.19874; 0.01; 1; 0; 5; 30.0024; 0; 
+1; 1; 508322; 508323; 408.629; 0; 3.60936; 0.01; 1; 0; 5; 30.0027; 0; 
+1; 1; 544739; 544740; 408.629; 0; 2.02658; 0.01; 1; 0; 5; 30.0023; 0; 
+1; 1; 555239; 555240; 408.629; 0; 3.74611; 0.01; 1; 0; 5; 30.2017; 0; 
+1; 1; 547823; 547824; 408.629; 0; 4.05283; 0.01; 1; 0; 5; 30.0026; 0; 
+1; 1; 515778; 515779; 408.629; 0; 2.15622; 0.01; 1; 0; 5; 30.2008; 0; 
+1; 1; 510480; 510481; 408.629; 0; 2.53785; 0.01; 1; 0; 5; 30.0034; 0; 
+1; 1; 497706; 497707; 408.629; 0; 3.10439; 0.03; 1; 0; 5; 30.2009; 0; 
 .
 control_KPIECE1
 17 common properties
@@ -225,12 +259,12 @@ longest_valid_segment_fraction = 0.01
 max_close_samples = 30
 max_control_duration = 10
 min_control_duration = 1
-projection.cellsize.0 = 0.0547474
-projection.cellsize.1 = 0.0538258
-projection.cellsize.2 = 0.108636
-projection.cellsize.3 = 0.109398
-projection.cellsize.4 = 0.108247
-projection.cellsize.5 = 0.0544792
+projection.cellsize.0 = 0.0531143
+projection.cellsize.1 = 0.0543552
+projection.cellsize.2 = 0.107052
+projection.cellsize.3 = 0.109847
+projection.cellsize.4 = 0.108319
+projection.cellsize.5 = 0.0547077
 projection.cellsize_factor = 0
 propagation_step_size = 0.01
 valid_segment_count_factor = 1
@@ -248,8 +282,25 @@ solved BOOLEAN
 status ENUM
 time REAL
 valid segment fraction REAL
-3 runs
-0; 1; 7541; 7542; 413.363; 0; 0; 0.1; 10; 1; 6; 0.228001; 0; 
-0; 1; 4418; 4419; 413.363; 0; 0; 0.04; 4; 1; 6; 0.117792; 0; 
-0; 1; 1599; 1600; 413.363; 0; 0; 0.06; 6; 1; 6; 0.0416327; 0; 
+20 runs
+0; 1; 3048; 3049; 408.629; 0; 0; 0.03; 3; 1; 6; 0.0899779; 0; 
+0; 1; 3929; 3930; 408.629; 0; 0; 0.08; 8; 1; 6; 0.117566; 0; 
+0; 1; 8067; 8068; 408.629; 0; 0; 0.16; 16; 1; 6; 0.291265; 0; 
+0; 1; 7091; 7092; 408.629; 0; 0; 0.06; 6; 1; 6; 0.237869; 0; 
+0; 1; 5392; 5393; 408.629; 0; 0; 0.08; 8; 1; 6; 0.164043; 0; 
+0; 1; 894; 895; 408.629; 0; 0; 0.04; 4; 1; 6; 0.0252972; 0; 
+0; 1; 5320; 5321; 408.629; 0; 0; 0.04; 4; 1; 6; 0.165857; 0; 
+0; 1; 905; 906; 408.629; 0; 0; 0.03; 3; 1; 6; 0.0235071; 0; 
+0; 1; 4070; 4071; 408.629; 0; 0; 0.06; 6; 1; 6; 0.119994; 0; 
+0; 1; 8816; 8817; 408.629; 0; 0; 0.05; 5; 1; 6; 0.310121; 0; 
+0; 1; 13334; 13335; 408.629; 0; 0; 0.06; 6; 1; 6; 0.56774; 0; 
+0; 1; 4953; 4954; 408.629; 0; 0; 0.04; 4; 1; 6; 0.143435; 0; 
+0; 1; 1161; 1162; 408.629; 0; 0; 0.04; 4; 1; 6; 0.0336843; 0; 
+0; 1; 3161; 3162; 408.629; 0; 0; 0.08; 8; 1; 6; 0.0916186; 0; 
+0; 1; 7068; 7069; 408.629; 0; 0; 0.08; 8; 1; 6; 0.229649; 0; 
+0; 1; 6329; 6330; 408.629; 0; 0; 0.05; 5; 1; 6; 0.195867; 0; 
+0; 1; 13258; 13259; 408.629; 0; 0; 0.03; 3; 1; 6; 0.531791; 0; 
+0; 1; 491; 492; 408.629; 0; 0; 0.04; 4; 1; 6; 0.013481; 0; 
+0; 1; 2630; 2631; 408.629; 0; 0; 0.08; 8; 1; 6; 0.0713059; 0; 
+0; 1; 4427; 4428; 408.629; 0; 0; 0.03; 3; 1; 6; 0.125874; 0; 
 .
